@@ -1,0 +1,33 @@
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Noto Sans', sans-serif;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-size: 62.5%;
+  font-family: var(--font-primary);
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  display: flex;
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-logo img {
+  max-width: clamp(180px, 25vw, 300px);
+}
