@@ -1,6 +1,8 @@
 :root {
   --font-primary: 'Inter', sans-serif;
   --font-secondary: 'Noto Sans', sans-serif;
+  --color-primary: #bbb;
+  --color-secondary: #00acc1;
 }
 *,
 *::before,
@@ -9,9 +11,16 @@
   margin: 0;
   padding: 0;
 }
-body {
+html {
   font-size: 62.5%;
+}
+body {
   font-family: var(--font-primary);
+  background: #22223b;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 a {
   text-decoration: none;
@@ -20,14 +29,195 @@ ul {
   list-style: none;
   display: flex;
 }
-.header-inner {
+.back {
+  margin-top: 30px;
+}
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-secondary);
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.btn:hover {
+  background: var(--color-secondary);
+  color: #000;
+}
+.btn:disabled {
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+.btn:disabled:hover {
+  background: transparent;
+  color: #fff;
+}
+.text-primary {
+  color: var(--color-secondary);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.active {
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+.inner-container {
   max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  margin-inline: auto;
+  padding: 0 16px;
+}
+.header {
+  background: rgba(9, 9, 9, 0.9);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9;
+  padding: 10px 0;
+}
+.header .inner-container {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .header-logo img {
-  max-width: clamp(180px, 25vw, 300px);
+  max-width: clamp(180px, 25vw, 200px);
 }
+.navbar ul {
+  gap: 1rem;
+}
+.navbar .nav-link {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+  padding: 1rem 0.8rem;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: var(--color-secondary);
+}
+/* now playing start */
+.now-playing {
+  padding: 100px;
+  min-height: 300px;
+  background: url(../images/placeholder.jpg) no-repeat center center/cover;
+}
+.now-playing h2 {
+  font-family: var(--font-secondary);
+  font-size: 3rem;
+  color: var(--color-primary);
+}
+/* now playing end */
+
+/* search start */
+.search-radio-box label {
+  font-size: 1.6rem;
+  color: #fff;
+  margin-right: 1rem;
+}
+.search .inner-container {
+  max-width: 600px;
+}
+.search-input {
+  width: 100%;
+  position: relative;
+  display: flex;
+  margin-top: 1rem;
+}
+.search-term {
+  width: 100%;
+  border: 2px solid #00b4cc;
+  border-right: none;
+  outline: none;
+  height: 50px;
+  padding: 10px;
+  border-radius: 5px 0 0 5px;
+  background: transparent;
+  color: #fff;
+  font-size: 1.8rem;
+}
+.search-term:hover,
+.search-term:focus {
+  border-color: #00b4ccb5;
+}
+.search-button {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #00b4cc;
+  background: #00b4cc;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: 0.3s all ease;
+}
+.search-button:hover {
+  opacity: 0.8;
+}
+/* search end */
+
+/* popular movies start */
+#popular-movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+.card {
+  background: #04376b;
+  padding: 5px;
+}
+
+.card img {
+  width: 100%;
+}
+
+.card-body {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  transition: all 0.5s ease-in-out;
+  background: #0a4b8f;
+}
+/* popular movies end */
+/* !footer start */
+.footer {
+  background: #000000;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+.footer .inner-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo img {
+  max-width: clamp(180px, 25vw, 200px);
+}
+.footer .social-links {
+  display: flex;
+  font-size: 20px;
+  gap: 10px;
+}
+.main-footer .container .social-links a {
+  color: #fff;
+}
+.main-footer .container .social-links a:hover {
+  color: var(--color-secondary);
+}
+/* footer end */
+/* search page start */
+#search-results{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+/* search page end */
