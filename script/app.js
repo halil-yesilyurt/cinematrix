@@ -7,7 +7,26 @@ async function showPopularMovies() {
   const popularMovies = document.getElementById('popular-movies');
   const { results } = await fetchData('movie/popular');
   console.log(results);
-
+  results.forEach((movie) => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    // Check if movie poster exist
+    const moviePoster = movie.poster_path
+      ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+      : '../images/no-image.jpg';
+    card.innerHTML = `
+    <a href="/pages/movie-details.html?id=${movie.id}">
+            <img src=${moviePoster} class="card-img-top" alt="${movie.title}" />
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">${movie.title}</h5>
+            <p class="card-text">
+              <small class="text-muted">Release: ${movie.release_date}</small>
+            </p>
+          </div>
+    `;
+    popularMovies.appendChild(card);
+  });
 }
 
 // Fetch data from TMDB api
