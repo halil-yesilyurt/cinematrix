@@ -1,26 +1,28 @@
-// import Swiper JS
-import Swiper from 'swiper';
-// import Swiper styles
-import 'swiper/css';
+const global = {
+  currentPage: window.location.pathname,
+};
 
-const swiper = new Swiper('.swiper', {
-    // Optional parameters
-    direction: 'vertical',
-    loop: true,
-  
-    // If we need pagination
-    pagination: {
-      el: '.swiper-pagination',
-    },
-  
-    // Navigation arrows
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  
-    // And if we need scrollbar
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-  });
+
+function initializeApp() {
+  switch (global.currentPage) {
+    case '/pages/index.html':
+      console.log('main page');
+      break;
+    case '/pages/tv-shows.html':
+      console.log('tv shows');
+      break;
+    case '/pages/show-details.html':
+      console.log('show details');
+      break;
+    case '/pages/movie-details.html':
+      console.log('movie details');
+      break;
+    case '/pages/search.html':
+      console.log('search');
+    default:
+      console.log('none');
+      break;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initializeApp);
