@@ -2,6 +2,17 @@ const global = {
   currentPage: window.location.pathname,
 };
 
+// Fetch data from TMDB api
+async function fetchData(endpoint) {
+  const API_KEY = 'REDACTED_REVOKED_TMDB_KEY';
+  const API_URL = 'https://api.themoviedb.org/3';
+
+  const response = await fetch(`${API_URL}/${endpoint}?api_key=${API_KEY}&language=en-US`);
+  const data = await response.json();
+
+  return data;
+}
+
 // Highlight active navbar link
 function highlightLink() {
   const navLinks = document.querySelectorAll('.nav-link');
