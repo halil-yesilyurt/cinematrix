@@ -32,7 +32,26 @@ async function showPopularMovies() {
 async function showPopularTvShows() {
   const popularShows = document.getElementById('popular-shows');
   const { results } = await fetchData('tv/popular');
-
+  results.forEach((show) => {
+    const tvShow = document.createElement('div');
+    tvShow.classList.add('card');
+    // Check if tv show poster exist
+    const showPoster = show.poster_path
+      ? `https://image.tmdb.org/t/p/original/${show.poster_path}`
+      : '../images/no-image.jpg';
+    tvShow.innerHTML = `
+    <a href="/pages/tv-shows.html?id=${show.id}">
+            <img src=${showPoster} class="card-img-top" alt="${show.name}" />
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">${show.name}</h5>
+            <p class="card-text">
+              <small class="text-muted">Aired: ${show.first_air_date}</small>
+            </p>
+          </div>
+    `;
+    popularShows.appendChild(tvShow);
+  });
 }
 
 // Fetch data from TMDB api
