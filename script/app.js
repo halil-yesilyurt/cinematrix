@@ -6,7 +6,6 @@ const global = {
 async function showPopularMovies() {
   const popularMovies = document.getElementById('popular-movies');
   const { results } = await fetchData('movie/popular');
-  console.log(results);
   results.forEach((movie) => {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -27,6 +26,13 @@ async function showPopularMovies() {
     `;
     popularMovies.appendChild(card);
   });
+}
+
+// Show popular tv shows
+async function showPopularTvShows() {
+  const popularShows = document.getElementById('popular-shows');
+  const { results } = await fetchData('tv/popular');
+
 }
 
 // Fetch data from TMDB api
@@ -68,7 +74,7 @@ function initializeApp() {
       showPopularMovies();
       break;
     case '/pages/tv-shows.html':
-      console.log('tv shows');
+      showPopularTvShows();
       break;
     case '/pages/show-details.html':
       console.log('show details');
