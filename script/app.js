@@ -2,7 +2,18 @@ const global = {
   currentPage: window.location.pathname,
 };
 
+// Highlight active navbar link
+function highlightLink() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach((navLink) => {
+    if (navLink.getAttribute('href') === global.currentPage) {
+      console.log(navLink);
+      navLink.classList.add('active');
+    }
+  });
+}
 
+// Runs when app initialize
 function initializeApp() {
   switch (global.currentPage) {
     case '/pages/index.html':
@@ -23,6 +34,7 @@ function initializeApp() {
       console.log('none');
       break;
   }
+  highlightLink();
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
