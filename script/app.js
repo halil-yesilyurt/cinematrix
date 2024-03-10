@@ -2,6 +2,14 @@ const global = {
   currentPage: window.location.pathname,
 };
 
+// Show popular movies
+async function showPopularMovies() {
+  const popularMovies = document.getElementById('popular-movies');
+  const { results } = await fetchData('movie/popular');
+  console.log(results);
+
+}
+
 // Fetch data from TMDB api
 async function fetchData(endpoint) {
   const API_KEY = '57dc4d5627c7069bc2cd661cd5a170ea';
@@ -9,7 +17,6 @@ async function fetchData(endpoint) {
 
   const response = await fetch(`${API_URL}/${endpoint}?api_key=${API_KEY}&language=en-US`);
   const data = await response.json();
-
   return data;
 }
 
@@ -18,7 +25,6 @@ function highlightLink() {
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach((navLink) => {
     if (navLink.getAttribute('href') === global.currentPage) {
-      console.log(navLink);
       navLink.classList.add('active');
     }
   });
@@ -28,7 +34,7 @@ function highlightLink() {
 function initializeApp() {
   switch (global.currentPage) {
     case '/pages/index.html':
-      console.log('main page');
+      showPopularMovies();
       break;
     case '/pages/tv-shows.html':
       console.log('tv shows');
