@@ -16,7 +16,9 @@ html {
 }
 body {
   font-family: var(--font-primary);
-  background: #22223b;
+  font-size: 1.6rem;
+  color: #fff;
+  background: #2e3440;
   min-height: 100vh;
   height: 100%;
   display: flex;
@@ -34,9 +36,9 @@ ul {
 }
 .btn {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1.2rem;
   border: 1px solid var(--color-secondary);
-  border-radius: 5px;
+  border-radius: 8px;
   color: #fff;
   cursor: pointer;
   background: transparent;
@@ -44,7 +46,7 @@ ul {
 }
 .btn:hover {
   background: var(--color-secondary);
-  color: #000;
+  color: #2e3440;
 }
 .btn:disabled {
   border-color: #ccc;
@@ -60,19 +62,17 @@ ul {
 .text-secondary {
   color: var(--color-secondary);
 }
-.active {
-  color: var(--color-secondary);
-  font-weight: 700;
-}
+
 .inner-container {
   max-width: 1200px;
   width: 100%;
   margin-inline: auto;
   padding: 0 16px;
 }
+/* header start */
 .header {
   background: rgba(9, 9, 9, 0.9);
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -92,15 +92,16 @@ ul {
 .navbar ul {
   gap: 1rem;
 }
-.navbar .nav-link {
+.nav-link {
   color: var(--color-primary);
   font-size: 1.8rem;
   padding: 1rem 0.8rem;
 }
-.navbar .nav-link:hover,
-.navbar .nav-link:focus {
+.nav-link:hover,
+.nav-link:focus {
   color: var(--color-secondary);
 }
+/* header end */
 /* now playing start */
 .now-playing {
   padding: 100px;
@@ -113,7 +114,6 @@ ul {
   color: var(--color-primary);
 }
 /* now playing end */
-
 /* search start */
 .search-radio-box label {
   font-size: 1.6rem;
@@ -131,68 +131,69 @@ ul {
 }
 .search-term {
   width: 100%;
-  border: 2px solid #00b4cc;
+  border: 2px solid var(--color-secondary);
   border-right: none;
   outline: none;
   height: 50px;
-  padding: 10px;
-  border-radius: 5px 0 0 5px;
+  padding: 12px;
+  border-radius: 8px 0 0 8px;
   background: transparent;
-  color: #fff;
+  color: #d8dee9;
   font-size: 1.8rem;
 }
 .search-term:hover,
 .search-term:focus {
-  border-color: #00b4ccb5;
+  border-color: #88c0d0;
 }
 .search-button {
-  width: 50px;
+  width: 60px;
   height: 50px;
   border: 1px solid #00b4cc;
   background: #00b4cc;
   text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
+  color: #000000;
+  border-radius: 0 8px 8px 0;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.8rem;
   transition: 0.3s all ease;
 }
 .search-button:hover {
   opacity: 0.8;
+  color: rgba(0, 0, 0, 0.7);
 }
 /* search end */
-
 /* popular movies start */
-#popular-movies {
+#popular-movies, #popular-shows {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;
 }
-.card {
-  background: #04376b;
-  padding: 5px;
+.inner-container h2{
+  text-align: center;
+  margin: 20px 0;
 }
-
+.card {
+  background: #4c566a;
+  padding: 10px;
+}
 .card img {
   width: 100%;
 }
-
 .card-body {
-  padding: 10px;
-  font-size: 20px;
+  padding: 12px;
+  font-size: 2rem;
 }
-
 .card:hover {
   transform: scale(1.05);
   transition: all 0.5s ease-in-out;
-  background: #0a4b8f;
+  background: #5e81ac;
 }
 /* popular movies end */
 /* !footer start */
 .footer {
-  background: #000000;
+  background: #3b4252;
   padding: 20px 0;
-  margin-top: 20px;
+  margin-top: auto;
 }
 .footer .inner-container {
   display: flex;
@@ -200,24 +201,60 @@ ul {
   align-items: center;
 }
 .footer-logo img {
-  max-width: clamp(180px, 25vw, 200px);
+  max-width: clamp(150px, 20vw, 200px);
 }
 .footer .social-links {
   display: flex;
-  font-size: 20px;
+  font-size: 1.8rem;
   gap: 10px;
 }
-.main-footer .container .social-links a {
-  color: #fff;
+.footer .social-links a {
+  color: #d8dee9;
 }
-.main-footer .container .social-links a:hover {
+.footer .social-links a:hover {
   color: var(--color-secondary);
 }
 /* footer end */
 /* search page start */
-#search-results{
+#search-results {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;
 }
 /* search page end */
+.active {
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+/* movie details page start */
+#movie-details h5{
+  font-size: 1.8rem;
+}
+.details-top{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+#movie-details ul{
+  flex-direction: column;
+}
+.fa-star{
+  color: gold;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.movie-score{
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.movie-info{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.movie-info .btn{
+  align-self: center;
+}
+/* movie details page end */
