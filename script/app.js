@@ -11,7 +11,7 @@ async function showPopularMovies() {
     card.classList.add('card');
     // Check if movie poster exist
     const moviePoster = movie.poster_path
-      ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+      ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
       : '../images/no-image.jpg';
     card.innerHTML = `
     <a href="/pages/movie-details.html?id=${movie.id}">
@@ -37,7 +37,7 @@ async function showPopularTvShows() {
     tvShow.classList.add('card');
     // Check if tv show poster exist
     const showPoster = show.poster_path
-      ? `https://image.tmdb.org/t/p/original/${show.poster_path}`
+      ? `https://image.tmdb.org/t/p/original${show.poster_path}`
       : '../images/no-image.jpg';
     tvShow.innerHTML = `
     <a href="/pages/tv-shows.html?id=${show.id}">
@@ -61,7 +61,7 @@ async function showMovieDetails() {
   const movie = await fetchData(`movie/${movieID}`);
   console.log(movie);
   const moviePoster = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w400/${movie.poster_path}`
+    ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
     : '../images/no-image.jpg';
   const div = document.createElement('div');
   div.setAttribute('id', 'movie-details');
@@ -99,8 +99,8 @@ async function showMovieDetails() {
     <li><span class="text-secondary">Status:</span> ${movie.status}</li>
   </ul>
   <h4>Production Companies</h4>
-  <div class="list-group">${movie.production_companies.map((movie) => {
-    return ' ' + movie.name;
+  <div class="list-group">${movie.production_companies.map((company) => {
+    return ' ' + company.name;
   })}</div>
 </div>`;
   movieDetails.appendChild(div);
