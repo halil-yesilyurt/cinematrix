@@ -83,7 +83,7 @@ async function showMovieDetails() {
       return `<li>${movie.name}</li>`;
     })}
     </ul>
-    <a href="https://www.imdb.com/${movie.imdb_id}" target="_blank" class="btn">Visit IMDB Page</a>
+    <a href="https://www.imdb.com/title/${movie.imdb_id}" target="_blank" class="btn">Visit IMDB Page</a>
   </div>
 </div>
 <div class="details-bottom">
