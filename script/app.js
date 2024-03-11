@@ -54,6 +54,15 @@ async function showPopularTvShows() {
   });
 }
 
+// Movie details page display
+async function showMovieDetails() {
+  const movieID = Number(window.location.search.split('=')[1]);
+  const movieDetails = document.getElementById('movie-details-wrapper');
+  const movie = await fetchData(`movie/${movieID}`);
+  console.log(movie);
+
+}
+
 // Fetch data from TMDB api
 async function fetchData(endpoint) {
   const API_KEY = '57dc4d5627c7069bc2cd661cd5a170ea';
@@ -99,7 +108,7 @@ function initializeApp() {
       console.log('show details');
       break;
     case '/pages/movie-details.html':
-      console.log('movie details');
+      showMovieDetails();
       break;
     case '/pages/search.html':
       console.log('search');
