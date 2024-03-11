@@ -89,7 +89,10 @@ async function showMovieDetails() {
 <div class="details-bottom">
   <h2>Movie Info</h2>
   <ul>
-    
+    <li><span class="text-secondary">Budget:</span> ${movie.budget.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</li>
+    <li><span class="text-secondary">Revenue:</span> ${movie.revenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</li>
+    <li><span class="text-secondary">Duration:</span> ${movie.runtime} minutes</li>
+    <li><span class="text-secondary">Status:</span> ${movie.status}</li>
   </ul>
   <h4>Production Companies</h4>
   <div class="list-group">${movie.production_companies.map((movie) => {
