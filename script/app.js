@@ -79,9 +79,7 @@ async function showMovieDetails() {
     <p>${movie.overview}</p>
     <h5>Genres</h5>
     <ul class="list-group">
-    ${movie.genres.map((movie) => {
-      return `<li>${movie.name}</li>`;
-    })}
+    ${movie.genres.map((movie) => `<li>${movie.name}</li>`).join('')}
     </ul>
     <a href="https://www.imdb.com/title/${movie.imdb_id}" target="_blank" class="btn">Visit IMDB Page</a>
   </div>
@@ -89,8 +87,14 @@ async function showMovieDetails() {
 <div class="details-bottom">
   <h2>Movie Info</h2>
   <ul>
-    <li><span class="text-secondary">Budget:</span> ${movie.budget.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</li>
-    <li><span class="text-secondary">Revenue:</span> ${movie.revenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</li>
+    <li><span class="text-secondary">Budget:</span> ${movie.budget.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    })}</li>
+    <li><span class="text-secondary">Revenue:</span> ${movie.revenue.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    })}</li>
     <li><span class="text-secondary">Duration:</span> ${movie.runtime} minutes</li>
     <li><span class="text-secondary">Status:</span> ${movie.status}</li>
   </ul>
