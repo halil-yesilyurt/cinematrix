@@ -60,7 +60,43 @@ async function showMovieDetails() {
   const movieDetails = document.getElementById('movie-details-wrapper');
   const movie = await fetchData(`movie/${movieID}`);
   console.log(movie);
-
+  const moviePoster = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+    : '../images/no-image.jpg';
+  const div = document.createElement('div');
+  div.setAttribute('id', 'movie-details');
+  div.innerHTML = `<div class="details-top">
+  <div>
+    <img src="${moviePoster}" class="card-img-top" alt="${movie.title}" />
+  </div>
+  <div>
+    <h2>${movie.title}</h2>
+    <p>
+      <i class="fas fa-star text-primary"></i>
+      ${movie.vote_average.toFixed(1)} / 10 
+    </p>
+    <p class="text-muted">Release Date: ${movie.release_date}</p>
+    <p>${movie.overview}</p>
+    <h5>Genres</h5>
+    <ul class="list-group">
+    ${movie.genres.map((movie) => {
+      return `<li>${movie.name}</li>`;
+    })}
+    </ul>
+    <a href="https://www.imdb.com/title/${movie.imdb_id}" target="_blank" class="btn">Visit IMDB Page</a>
+  </div>
+</div>
+<div class="details-bottom">
+  <h2>Movie Info</h2>
+  <ul>
+    
+  </ul>
+  <h4>Production Companies</h4>
+  <div class="list-group">${movie.production_companies.map((movie) => {
+    return ' ' + movie.name;
+  })}</div>
+</div>`;
+  movieDetails.appendChild(div);
 }
 
 // Fetch data from TMDB api
