@@ -61,7 +61,7 @@ async function showMovieDetails() {
   const movie = await fetchData(`movie/${movieID}`);
   console.log(movie);
   const moviePoster = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+    ? `https://image.tmdb.org/t/p/w400/${movie.poster_path}`
     : '../images/no-image.jpg';
   const div = document.createElement('div');
   div.setAttribute('id', 'movie-details');
@@ -69,10 +69,10 @@ async function showMovieDetails() {
   <div>
     <img src="${moviePoster}" class="card-img-top" alt="${movie.title}" />
   </div>
-  <div>
+  <div class="movie-info">
     <h2>${movie.title}</h2>
-    <p>
-      <i class="fas fa-star text-primary"></i>
+    <p class="movie-score">
+    <i class="fa-solid fa-star"></i>
       ${movie.vote_average.toFixed(1)} / 10 
     </p>
     <p class="text-muted">Release Date: ${movie.release_date}</p>
