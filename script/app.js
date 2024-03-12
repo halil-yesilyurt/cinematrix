@@ -136,15 +136,28 @@ async function showMovieDetails() {
   </div>
   <div class="production-info">
   <h3>Companies</h3>
-  <div class="list-group">${movie.production_companies.map((company) => {
-    return ' ' + company.name;
-  })}</div>
+  <div class="list-group">${await getProductionCompaniesDetails(movie.production_companies)}</div>
   </div>
 </div>`;
   movieDetails.appendChild(div);
 }
 
 // Fetch production companies details
+async function getProductionCompaniesDetails(companies) {
+  const companyDetails = await Promise.all(
+    companies.map(async (company) => {
+      const companyData = await fetchData(`/company/${company.id}`);
+      const imgSrc = companyData.logo_path
+        ? `https://image.tmdb.org/t/p/w200${companyData.logo_path}`
+        : '../images/no-image.jpg';
+      // Add fallback URL
+      return `<a class="company-link" href="${
+        companyData.homepage || '#'
+      }" target="_blank"><img class="company-logo" src='${imgSrc}'/> ${companyData.name}</a>`;
+    })
+  );
+  return companyDetails.join('');
+}
 
 // Fetch data from TMDB api
 async function fetchData(endpoint) {
