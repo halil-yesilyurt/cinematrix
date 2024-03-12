@@ -2,7 +2,7 @@
   --font-primary: 'Inter', sans-serif;
   --font-secondary: 'Noto Sans', sans-serif;
   --color-primary: #bbb;
-  --color-secondary: #00acc1;
+  --color-secondary: #239bce;
 }
 *,
 *::before,
@@ -18,7 +18,7 @@ body {
   font-family: var(--font-primary);
   font-size: 1.6rem;
   color: #fff;
-  background: #2e3440;
+  background: #23272f;
   min-height: 100vh;
   height: 100%;
   display: flex;
@@ -31,22 +31,57 @@ ul {
   list-style: none;
   display: flex;
 }
-.back {
-  margin-top: 30px;
+.back-to {
+  margin: 3rem 0;
 }
 .btn {
-  display: inline-block;
-  padding: 0.7rem 1.2rem;
-  border: 1px solid var(--color-secondary);
-  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 0.7rem 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto !important;
   color: #fff;
+  background: #000;
+  border-radius: 0.8rem;
+  border: 0px;
   cursor: pointer;
-  background: transparent;
-  transition: all 0.3s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: 0px 0px 14px -7px var(--color-secondary);
+  background-image: linear-gradient(45deg, #1f8ab8 0%, var(--color-secondary) 51%, #1f8ab8 100%);
+  display: block;
+  width: max-content;
+}
+.btn-imdb,
+.btn-homepage {
+  padding: 1rem 2rem;
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  text-transform: capitalize;
+  border-radius: 0.3rem;
+  box-shadow: 0px 0px 14px -7px #e2b616;
+  background-image: linear-gradient(45deg, #e2b616 0%, #c9c2a8 51%, #e2b616 100%);
+}
+.btn-homepage{
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  color: #fff;
+}
+.button-87:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.button-87:active {
+  transform: scale(0.95);
 }
 .btn:hover {
-  background: var(--color-secondary);
-  color: #2e3440;
+  background-position: right center;
+  text-decoration: none;
 }
 .btn:disabled {
   border-color: #ccc;
@@ -56,6 +91,10 @@ ul {
   background: transparent;
   color: #fff;
 }
+.btn:active {
+  transform: scale(0.95);
+}
+
 .text-primary {
   color: var(--color-secondary);
 }
@@ -163,12 +202,13 @@ ul {
 }
 /* search end */
 /* popular movies start */
-#popular-movies, #popular-shows {
+#popular-movies,
+#popular-shows {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;
 }
-.inner-container h2{
+.inner-container h2 {
   text-align: center;
   margin: 20px 0;
 }
@@ -227,34 +267,41 @@ ul {
   font-weight: 700;
 }
 /* movie details page start */
-#movie-details h5{
+
+#movie-details h5 {
   font-size: 1.8rem;
 }
-.details-top{
+.details-top {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 }
-#movie-details ul{
+#movie-details ul {
   flex-direction: column;
 }
-.fa-star{
+.card-img-top {
+}
+.fa-star {
   color: gold;
   font-size: 1.4rem;
   font-weight: 600;
 }
-.movie-score{
+.movie-score {
   display: flex;
   align-items: center;
-  gap: .4rem;
+  gap: 0.4rem;
 }
-.movie-info{
+.movie-info {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.movie-info .btn{
+.movie-info .btn {
   align-self: center;
+}
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
 /* movie details page end */
