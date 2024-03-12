@@ -54,14 +54,19 @@ async function showPopularTvShows() {
   });
 }
 
+// Overlay background image of content
+
+
 // Movie details page display
 async function showMovieDetails() {
   const movieID = Number(window.location.search.split('=')[1]);
   const movieDetails = document.getElementById('movie-details-wrapper');
   const movie = await fetchData(`movie/${movieID}`);
   console.log(movie);
+
+  // showBackgroundImg('movie', movie.backdrop_path);
   const moviePoster = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
+    ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
     : '../images/no-image.jpg';
   const div = document.createElement('div');
   div.setAttribute('id', 'movie-details');
@@ -69,7 +74,7 @@ async function showMovieDetails() {
   <div>
     <img src="${moviePoster}" class="card-img-top" alt="${movie.title}" />
   </div>
-  <div class="movie-info">
+  <div class="movie-overview">
     <h2>${movie.title}</h2>
     <p class="movie-score">
     <i class="fa-solid fa-star"></i>
@@ -81,30 +86,41 @@ async function showMovieDetails() {
     <ul class="list-group">
     ${movie.genres.map((movie) => `<li>${movie.name}</li>`).join('')}
     </ul>
-    <a href="https://www.imdb.com/title/${movie.imdb_id}" target="_blank" class="btn">Visit IMDB Page</a>
+    <div class="btn-group">
+    <a href="${movie.homepage}" target="_blank" class="btn btn-homepage">Movie Page</a>
+    <a href="https://www.imdb.com/title/${movie.imdb_id}" target="_blank" class="btn btn-imdb">Visit IMDB</a>
+    </div>
   </div>
 </div>
 <div class="details-bottom">
-  <h2>Movie Info</h2>
+<div class="movie-info">
+  <h3>Movie Info</h3>
   <ul>
-    <li><span class="text-secondary">Budget:</span> ${movie.budget.toLocaleString('en-US', {
+    <li><span class="text-ternary">Budget:</span> ${movie.budget.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
     })}</li>
-    <li><span class="text-secondary">Revenue:</span> ${movie.revenue.toLocaleString('en-US', {
+    <li><span class="text-ternary">Revenue:</span> ${movie.revenue.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
     })}</li>
-    <li><span class="text-secondary">Duration:</span> ${movie.runtime} minutes</li>
-    <li><span class="text-secondary">Status:</span> ${movie.status}</li>
+    <li><span class="text-ternary">Duration:</span> ${movie.runtime} minutes</li>
+    <li><span class="text-ternary">Status:</span> ${movie.status}</li>
   </ul>
-  <h4>Production Companies</h4>
+  </div>
+  
+  <div class="production-info">
+  <h3>Companies</h3>
   <div class="list-group">${movie.production_companies.map((company) => {
     return ' ' + company.name;
   })}</div>
+  </div>
 </div>`;
   movieDetails.appendChild(div);
 }
+
+// Fetch production companies details
+
 
 // Fetch data from TMDB api
 async function fetchData(endpoint) {
