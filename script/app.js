@@ -124,7 +124,16 @@ async function showMovieDetails() {
     <li><span class="text-ternary">Status:</span> ${movie.status}</li>
   </ul>
   </div>
-  
+  <div class="country-lan-info">
+  <h3>Countries</h3>
+  <div class="list-group">${movie.production_countries.map((country) => {
+    return ' ' + country.name;
+  })}</div>
+  <h3>Languages</h3>
+  <div class="list-group">${movie.spoken_languages.map((lan) => {
+    return ' ' + lan.name;
+  })}</div>
+  </div>
   <div class="production-info">
   <h3>Companies</h3>
   <div class="list-group">${movie.production_companies.map((company) => {
