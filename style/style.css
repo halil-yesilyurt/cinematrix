@@ -273,7 +273,7 @@ ul {
   font-weight: 700;
 }
 /* movie details page start */
-.inner-container h3{
+.inner-container h3 {
   margin: 1rem 0;
   text-align: center;
   font-size: 2rem;
@@ -336,7 +336,21 @@ ul {
   flex-direction: column;
   gap: 1rem;
 }
-.country-lan-info{
+.country-lan-info {
   align-items: center;
+}
+.company-logo {
+  max-width: 70px;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+.company-link {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: max-content;
 }
 /* movie details page end */
