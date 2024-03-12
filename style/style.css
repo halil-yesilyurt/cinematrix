@@ -3,6 +3,7 @@
   --font-secondary: 'Noto Sans', sans-serif;
   --color-primary: #bbb;
   --color-secondary: #239bce;
+  --color-ternary: #e63946;
 }
 *,
 *::before,
@@ -32,7 +33,7 @@ ul {
   display: flex;
 }
 .back-to {
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 .btn {
   margin: 1rem 0;
@@ -53,6 +54,7 @@ ul {
   background-image: linear-gradient(45deg, #1f8ab8 0%, var(--color-secondary) 51%, #1f8ab8 100%);
   display: block;
   width: max-content;
+  font-size: 1.4rem;
 }
 .btn-imdb,
 .btn-homepage {
@@ -63,10 +65,11 @@ ul {
   border-radius: 0.3rem;
   box-shadow: 0px 0px 14px -7px #e2b616;
   background-image: linear-gradient(45deg, #e2b616 0%, #c9c2a8 51%, #e2b616 100%);
+  font-size: 1.6rem;
 }
-.btn-homepage{
+.btn-homepage {
   box-shadow: 0px 0px 14px -7px #f09819;
-  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  background-image: linear-gradient(45deg, #ff512f 0%, #f09819 51%, #ff512f 100%);
   color: #fff;
 }
 .button-87:hover {
@@ -101,7 +104,10 @@ ul {
 .text-secondary {
   color: var(--color-secondary);
 }
-
+.text-ternary {
+  color: var(--color-ternary);
+  font-weight: 500;
+}
 .inner-container {
   max-width: 1200px;
   width: 100%;
@@ -206,11 +212,11 @@ ul {
 #popular-shows {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 20px;
+  grid-gap: 2rem;
 }
 .inner-container h2 {
   text-align: center;
-  margin: 20px 0;
+  margin: 2rem 0;
 }
 .card {
   background: #4c566a;
@@ -220,7 +226,7 @@ ul {
   width: 100%;
 }
 .card-body {
-  padding: 12px;
+  padding: 1.2rem;
   font-size: 2rem;
 }
 .card:hover {
@@ -267,19 +273,29 @@ ul {
   font-weight: 700;
 }
 /* movie details page start */
-
-#movie-details h5 {
-  font-size: 1.8rem;
+.inner-container h3{
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 2rem;
 }
 .details-top {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
+.details-bottom {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
 #movie-details ul {
+  list-style: inside;
+  gap: 0.4rem;
   flex-direction: column;
 }
 .card-img-top {
+  max-width: 300px;
+  object-fit: cover;
 }
 .fa-star {
   color: gold;
@@ -291,12 +307,12 @@ ul {
   align-items: center;
   gap: 0.4rem;
 }
-.movie-info {
+.movie-overview {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.movie-info .btn {
+.movie-overview .btn {
   align-self: center;
 }
 .btn-group {
