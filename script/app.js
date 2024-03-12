@@ -55,7 +55,23 @@ async function showPopularTvShows() {
 }
 
 // Overlay background image of content
-
+function showBackgroundImg(type, path) {
+  const style = document.createElement('style');
+  style.textContent = `
+  #${type}-details-wrapper::after {
+    content: "";
+    background: url(https://image.tmdb.org/t/p/original${path}) center/cover no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.1;
+  }
+`;
+  document.head.appendChild(style);
+}
 
 // Movie details page display
 async function showMovieDetails() {
@@ -64,7 +80,7 @@ async function showMovieDetails() {
   const movie = await fetchData(`movie/${movieID}`);
   console.log(movie);
 
-  // showBackgroundImg('movie', movie.backdrop_path);
+  showBackgroundImg('movie', movie.backdrop_path);
   const moviePoster = movie.poster_path
     ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
     : '../images/no-image.jpg';
@@ -120,7 +136,6 @@ async function showMovieDetails() {
 }
 
 // Fetch production companies details
-
 
 // Fetch data from TMDB api
 async function fetchData(endpoint) {
