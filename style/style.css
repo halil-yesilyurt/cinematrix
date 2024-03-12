@@ -330,6 +330,13 @@ ul {
 .details-bottom h4 {
   margin: 1rem 0 0;
 }
-
-
+.country-lan-info,
+.production-info .list-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.country-lan-info{
+  align-items: center;
+}
 /* movie details page end */
