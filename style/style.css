@@ -320,4 +320,16 @@ ul {
   justify-content: space-between;
   gap: 1rem;
 }
+.details-bottom li {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.details-bottom li:last-child {
+  border: 0;
+}
+.details-bottom h4 {
+  margin: 1rem 0 0;
+}
+
+
 /* movie details page end */
