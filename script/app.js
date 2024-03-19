@@ -131,7 +131,7 @@ async function showMovieDetails() {
   })}</div>
   <h3>Languages</h3>
   <div class="list-group">${movie.spoken_languages.map((lan) => {
-    return ' ' + lan.name;
+    return ' ' + lan.english_name;
   })}</div>
   </div>
   <div class="production-info">
