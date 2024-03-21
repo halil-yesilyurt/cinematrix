@@ -148,6 +148,12 @@ async function showTvShowDetails() {
   const tvShowDetails = document.getElementById('show-details-wrapper');
   const tvShow = await fetchData(`tv/${seriesID}`);
   console.log(tvShow);
+  showBackgroundImg('show', tvShow.backdrop_path);
+  const tvPoster = tvShow.poster_path
+  ? `https://image.tmdb.org/t/p/w300${tvShow.poster_path}`
+  : '../images/no-image.jpg';
+  const div = document.createElement('div');
+  div.setAttribute('id', 'show-details');
 }
 
 // Fetch production companies details
