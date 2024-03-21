@@ -40,7 +40,7 @@ async function showPopularTvShows() {
       ? `https://image.tmdb.org/t/p/original${show.poster_path}`
       : '../images/no-image.jpg';
     tvShow.innerHTML = `
-    <a href="/pages/tv-shows.html?id=${show.id}">
+    <a href="/pages/show-details.html?id=${show.id}">
             <img src=${showPoster} class="card-img-top" alt="${show.name}" />
           </a>
           <div class="card-body">
@@ -142,6 +142,14 @@ async function showMovieDetails() {
   movieDetails.appendChild(div);
 }
 
+// Tv shows details page display
+async function showTvShowDetails() {
+  const seriesID = Number(window.location.search.split('=')[1]);
+  const tvShowDetails = document.getElementById('show-details-wrapper');
+  const tvShow = await fetchData(`tv/${seriesID}`);
+  console.log(tvShow);
+}
+
 // Fetch production companies details
 async function getProductionCompaniesDetails(companies) {
   const companyDetails = await Promise.all(
@@ -201,7 +209,7 @@ function initializeApp() {
       showPopularTvShows();
       break;
     case '/pages/show-details.html':
-      console.log('show details');
+      showTvShowDetails()
       break;
     case '/pages/movie-details.html':
       showMovieDetails();
