@@ -154,6 +154,30 @@ async function showTvShowDetails() {
   : '../images/no-image.jpg';
   const div = document.createElement('div');
   div.setAttribute('id', 'show-details');
+  div.innerHTML = `<div class="details-top">
+  <div>
+    <img src="${tvPoster}" class="card-img-top" alt="${tvShow.name}" />
+  </div>
+  <div class="movie-overview">
+    <h2>${tvShow.name}</h2>
+    <p class="movie-score">
+    <i class="fa-solid fa-star"></i>
+      ${tvShow.vote_average.toFixed(1)} / 10 
+    </p>
+    <p class="text-muted">Firts Air Date: ${tvShow.first_air_date}</p>
+    <p class="text-muted">Last Air Date: ${tvShow.last_air_date}</p>
+    <p>${tvShow.overview}</p>
+    <h5>Genres</h5>
+    <ul class="list-group">
+    ${tvShow.genres.map((movie) => `<li>${tvShow.name}</li>`).join('')}
+    </ul>
+    <div class="btn-group">
+    <a href="${tvShow.homepage}" target="_blank" class="btn btn-homepage">Movie Page</a>
+    </div>
+  </div>
+</div>
+`;
+  tvShowDetails.appendChild(div);
 }
 
 // Fetch production companies details
