@@ -197,7 +197,10 @@ async function showTvShowDetails() {
       return ' ' + lan.english_name;
     })}</div>
   </div>
-  
+  <div class="production-info">
+    <h3>Companies</h3>
+    <div class="list-group">${await getProductionCompaniesDetails(tvShow.production_companies)}</div>
+  </div>
 </div>`;
   tvShowDetails.appendChild(div);
 }
