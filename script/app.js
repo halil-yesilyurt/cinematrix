@@ -164,8 +164,6 @@ async function showTvShowDetails() {
     <i class="fa-solid fa-star"></i>
       ${tvShow.vote_average.toFixed(1)} / 10 
     </p>
-    <p class="text-muted">Firts Air Date: ${tvShow.first_air_date}</p>
-    <p class="text-muted">Last Air Date: ${tvShow.last_air_date}</p>
     <p>${tvShow.overview}</p>
     <h5>Genres</h5>
     <ul class="list-group">
@@ -181,6 +179,7 @@ async function showTvShowDetails() {
     <h3>Show Info</h3>
     <ul>
       <li><span class="text-ternary">Status:</span> ${tvShow.status}</li>
+      <li><span class="text-ternary">Firts Air:</span> ${tvShow.first_air_date}</li>
       <li><span class="text-ternary">Season:</span> ${tvShow.number_of_seasons}</li>
       <li><span class="text-ternary">Episode:</span> ${tvShow.number_of_episodes}</li>
       ${
