@@ -150,17 +150,17 @@ async function showTvShowDetails() {
   console.log(tvShow);
   showBackgroundImg('show', tvShow.backdrop_path);
   const tvPoster = tvShow.poster_path
-  ? `https://image.tmdb.org/t/p/w300${tvShow.poster_path}`
-  : '../images/no-image.jpg';
+    ? `https://image.tmdb.org/t/p/w300${tvShow.poster_path}`
+    : '../images/no-image.jpg';
   const div = document.createElement('div');
   div.setAttribute('id', 'show-details');
   div.innerHTML = `<div class="details-top">
   <div>
     <img src="${tvPoster}" class="card-img-top" alt="${tvShow.name}" />
   </div>
-  <div class="movie-overview">
+  <div class="tv-show-overview">
     <h2>${tvShow.name}</h2>
-    <p class="movie-score">
+    <p class="tv-show-score">
     <i class="fa-solid fa-star"></i>
       ${tvShow.vote_average.toFixed(1)} / 10 
     </p>
@@ -169,14 +169,26 @@ async function showTvShowDetails() {
     <p>${tvShow.overview}</p>
     <h5>Genres</h5>
     <ul class="list-group">
-    ${tvShow.genres.map((movie) => `<li>${tvShow.name}</li>`).join('')}
+    ${tvShow.genres.map((show) => `<li>${show.name}</li>`).join('')}
     </ul>
     <div class="btn-group">
     <a href="${tvShow.homepage}" target="_blank" class="btn btn-homepage">Movie Page</a>
     </div>
   </div>
 </div>
-`;
+<div class="details-bottom">
+  <div class="tv-show-info">
+    <h3>Show Info</h3>
+    <ul>
+      <li><span class="text-ternary">Status:</span> ${tvShow.status}</li>
+      <li><span class="text-ternary">Season:</span> ${tvShow.number_of_seasons}</li>
+      <li><span class="text-ternary">Episodes:</span> ${tvShow.number_of_episodes}</li>
+      ${tvShow.episode_run_time.length ? `<li><span class="text-ternary">Duration: </span> ${tvShow.episode_run_time} minutes</li>` : ''}
+      <li><span class="text-ternary">Next Episode: </span> ${tvShow.next_episode_to_air.air_date}</li>
+    </ul>
+  </div>
+  
+</div>`;
   tvShowDetails.appendChild(div);
 }
 
@@ -239,7 +251,7 @@ function initializeApp() {
       showPopularTvShows();
       break;
     case '/pages/show-details.html':
-      showTvShowDetails()
+      showTvShowDetails();
       break;
     case '/pages/movie-details.html':
       showMovieDetails();
