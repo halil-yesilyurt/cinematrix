@@ -1,5 +1,11 @@
 const global = {
   currentPage: window.location.pathname,
+  search: {
+    type: '',
+    searchTerm: '',
+    page: 1,
+    totalPage: 1,
+  },
 };
 
 // Show popular movies
@@ -251,6 +257,18 @@ async function showNowPlaying() {
   });
 }
 
+// Search for content
+async function searchContent() {
+  const queryString = window.location.search;
+  const urlParam = new URLSearchParams(queryString);
+  console.log(urlParam.get('type'));
+
+  const checkedRadio = document.querySelector('.search-radio-box input[type=radio]:checked');
+  
+  const { results } = await fetchData(`search/${checkedRadio.value}`);
+  console.log(results);
+}
+
 // Initialize swiper object
 function initSwiper() {
   const swiper = new Swiper('.swiper', {
@@ -315,6 +333,7 @@ function initializeApp() {
     case '/pages/index.html':
       showPopularMovies();
       showNowPlaying();
+      searchContent();
       break;
     case '/pages/tv-shows.html':
       showPopularTvShows();
@@ -326,7 +345,8 @@ function initializeApp() {
       showMovieDetails();
       break;
     case '/pages/search.html':
-      console.log('search');
+      searchContent();
+      showNowPlaying();
     default:
       console.log('none');
       break;
