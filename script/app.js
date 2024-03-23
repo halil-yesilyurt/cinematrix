@@ -187,7 +187,11 @@ async function showTvShowDetails() {
           ? `<li><span class="text-ternary">Duration: </span> ${tvShow.episode_run_time} minutes</li>`
           : ''
       }
-      ${tvShow.next_episode_to_air ? `<li><span class="text-ternary">Next Episode:</span> ${tvShow.next_episode_to_air.air_date}</li>` : ''}
+      ${
+        tvShow.next_episode_to_air
+          ? `<li><span class="text-ternary">Next Episode:</span> ${tvShow.next_episode_to_air.air_date}</li>`
+          : ''
+      }
     </ul>
   </div>
   <div class="country-lan-info">
@@ -223,6 +227,14 @@ async function getProductionCompaniesDetails(companies) {
     })
   );
   return companyDetails.join('');
+}
+
+// Display slider movies
+async function showNowPlaying() {
+  const { results } = await fetchData('movie/now_playing');
+  console.log(results);
+  const swiper = document.querySelector('.swiper-wrapper');
+
 }
 
 // Fetch data from TMDB api
@@ -262,6 +274,7 @@ function initializeApp() {
   switch (global.currentPage) {
     case '/pages/index.html':
       showPopularMovies();
+      showNowPlaying();
       break;
     case '/pages/tv-shows.html':
       showPopularTvShows();
