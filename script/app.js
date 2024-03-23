@@ -254,24 +254,25 @@ async function showNowPlaying() {
 // Initialize swiper object
 function initSwiper() {
   const swiper = new Swiper('.swiper', {
-    slidesPerView:4,
-    spaceBetween:30,
+    slidesPerView: 1,
+    spaceBetween: 30,
+    speed: 400,
     loop: true,
-    freeMode:true,
+    freeMode: true,
     autoplay: {
       delay: 4000,
-      disableOnInteraction:false,
+      disableOnInteraction: false,
     },
-
-    pagination: {
-      el: '.swiper-pagination',
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    scrollbar: {
-      el: '.swiper-scrollbar',
+    breakpoints: {
+      500: {
+        slidesPerView: 2,
+      },
+      768: {
+        slidesPerView: 3,
+      },
+      1200: {
+        slidesPerView: 4,
+      },
     },
   });
 }
