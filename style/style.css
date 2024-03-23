@@ -331,13 +331,14 @@ ul {
   margin: 1rem 0 0;
 }
 .country-lan-info,
-.production-info .list-group {
+.list-group {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 .country-lan-info {
   align-items: center;
+  text-align: center;
 }
 .company-logo {
   max-width: 70px;
@@ -351,6 +352,20 @@ ul {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: max-content;
+  width: 100%;
+}
+.company-link:hover,
+.company-link:focus{
+  text-decoration: underline;
+}
+.details-bottom div{
+  max-width: 300px;
 }
 /* movie details page end */
+/* tv show details start */
+#show-details ul {
+  list-style: inside;
+  gap: 0.4rem;
+  flex-direction: column;
+}
+/* tv show details end */
