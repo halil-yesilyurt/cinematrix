@@ -182,9 +182,13 @@ async function showTvShowDetails() {
     <ul>
       <li><span class="text-ternary">Status:</span> ${tvShow.status}</li>
       <li><span class="text-ternary">Season:</span> ${tvShow.number_of_seasons}</li>
-      <li><span class="text-ternary">Episodes:</span> ${tvShow.number_of_episodes}</li>
-      ${tvShow.episode_run_time.length ? `<li><span class="text-ternary">Duration: </span> ${tvShow.episode_run_time} minutes</li>` : ''}
-      <li><span class="text-ternary">Next Episode: </span> ${tvShow.next_episode_to_air.air_date}</li>
+      <li><span class="text-ternary">Episode:</span> ${tvShow.number_of_episodes}</li>
+      ${
+        tvShow.episode_run_time.length
+          ? `<li><span class="text-ternary">Duration: </span> ${tvShow.episode_run_time} minutes</li>`
+          : ''
+      }
+      ${tvShow.next_episode_to_air ? `<li><span class="text-ternary">Next Episode:</span> ${tvShow.next_episode_to_air.air_date}</li>` : ''}
     </ul>
   </div>
   <div class="country-lan-info">
