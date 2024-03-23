@@ -243,9 +243,36 @@ async function showNowPlaying() {
       <img src="${imgSrc}" alt="${movie.title}" />
     </a>
     <h4 class="swiper-rating">
-      <i class="fas fa-star text-secondary"></i> ${movie.vote_average.toFixed(1)} / 10
+      <i class="fa-solid fa-star"></i> ${movie.vote_average.toFixed(1)} / 10
     </h4>`;
     swiper.appendChild(div);
+
+    initSwiper();
+  });
+}
+
+// Initialize swiper object
+function initSwiper() {
+  const swiper = new Swiper('.swiper', {
+    slidesPerView:4,
+    spaceBetween:30,
+    loop: true,
+    freeMode:true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction:false,
+    },
+
+    pagination: {
+      el: '.swiper-pagination',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
   });
 }
 
