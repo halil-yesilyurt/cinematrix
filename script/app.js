@@ -234,7 +234,19 @@ async function showNowPlaying() {
   const { results } = await fetchData('movie/now_playing');
   console.log(results);
   const swiper = document.querySelector('.swiper-wrapper');
-
+  results.forEach((movie) => {
+    const div = document.createElement('div');
+    div.classList.add('swiper-slide');
+    const imgSrc = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '../images/no-image.jpg';
+    div.innerHTML = `
+    <a href="movie-details.html?id=${movie.id}">
+      <img src="${imgSrc}" alt="${movie.title}" />
+    </a>
+    <h4 class="swiper-rating">
+      <i class="fas fa-star text-secondary"></i> ${movie.vote_average.toFixed(1)} / 10
+    </h4>`;
+    swiper.appendChild(div);
+  });
 }
 
 // Fetch data from TMDB api
