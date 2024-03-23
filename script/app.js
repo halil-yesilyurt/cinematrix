@@ -187,6 +187,16 @@ async function showTvShowDetails() {
       <li><span class="text-ternary">Next Episode: </span> ${tvShow.next_episode_to_air.air_date}</li>
     </ul>
   </div>
+  <div class="country-lan-info">
+    <h3>Countries</h3>
+    <div class="list-group">${tvShow.production_countries.map((country) => {
+      return ' ' + country.name;
+    })}</div>
+    <h3>Languages</h3>
+    <div class="list-group">${tvShow.spoken_languages.map((lan) => {
+      return ' ' + lan.english_name;
+    })}</div>
+  </div>
   
 </div>`;
   tvShowDetails.appendChild(div);
