@@ -6,6 +6,10 @@ const global = {
     page: 1,
     totalPage: 1,
   },
+  api:{
+    apiKey:'REDACTED_REVOKED_TMDB_KEY',
+    apiURL: 'https://api.themoviedb.org/3'
+  }
 };
 
 // Show popular movies
@@ -267,6 +271,7 @@ async function searchContent() {
 
   if (global.search.searchTerm && global.search.searchTerm !== '') {
     const results = await searchAPIData();
+    console.log(results);
   } else {
     showAlert('Please enter a search term');
   }
@@ -304,15 +309,15 @@ function initSwiper() {
 
 // Fetch data from TMDB api
 async function fetchData(endpoint) {
-  const API_KEY = 'REDACTED_REVOKED_TMDB_KEY';
-  const API_URL = 'https://api.themoviedb.org/3';
+  const API_KEY = global.api.apiKey;
+  const API_URL = global.api.apiURL;
   // while data fecthing spinner display
   showSpinner();
   const response = await fetch(`${API_URL}/${endpoint}?api_key=${API_KEY}&language=en-US`);
   const data = await response.json();
   hideSpinner();
   return data;
-}
+} 
 
 // Highlight active navbar link
 function highlightLink() {
