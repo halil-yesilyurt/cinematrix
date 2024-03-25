@@ -242,7 +242,6 @@ async function getProductionCompaniesDetails(companies) {
 // Display slider movies
 async function showNowPlaying() {
   const { results } = await fetchData('movie/now_playing');
-  console.log(results);
   const swiper = document.querySelector('.swiper-wrapper');
   results.forEach((movie) => {
     const div = document.createElement('div');
@@ -269,8 +268,16 @@ async function searchContent() {
   global.search.searchTerm = urlParam.get('search-term');
 
   if (global.search.searchTerm && global.search.searchTerm !== '') {
-    const results = await searchAPIData();
+    const { results, total_pages, page } = await searchAPIData();
     console.log(results);
+    const searchInput = document.querySelector('.search-term');
+    if (results.length === 0) {
+      showAlert('No results found');
+      return;
+    }
+    displaySearchResults(results);
+
+    searchInput.value = '';
   } else {
     showAlert('Please enter a search term');
   }
@@ -278,6 +285,29 @@ async function searchContent() {
   // const checkedRadio = document.querySelector('.search-radio-box input[type=radio]:checked');
   // const { results } = await fetchData(`search/${checkedRadio.value}`);
   // console.log(results);
+}
+
+// Display search results
+function displaySearchResults(results) {
+  results.forEach((result) => {
+    const searchResult = document.getElementById('search-results-wrapper');
+    const div = document.createElement('div');
+    div.setAttribute('id', 'search-results');
+    div.innerHTML = `
+    <div class="card">
+        <a href="/pages/${global.search.type}-details.html?id=${result.id}"">
+          <img src="../images/no-image.jpg" class="card-img-top" alt="" />
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">Movie Or Show Name</h5>
+          <p class="card-text">
+            <small class="text-muted">Release: XX/XX/XXXX</small>
+          </p>
+        </div>
+      </div>
+    `;
+    searchResult.appendChild(div)
+  });
 }
 
 // Initialize swiper object
@@ -313,7 +343,7 @@ async function searchAPIData() {
   // while data fecthing spinner display
   showSpinner();
   const response = await fetch(
-    `${API_URL}/search/${global.search.type}?api_key=${API_KEY}&language=en-US=${global.search.searchTerm}`
+    `${API_URL}/search/${global.search.type}?api_key=${API_KEY}&language=en-US&query=${global.search.searchTerm}`
   );
   const data = await response.json();
   hideSpinner();
@@ -343,7 +373,7 @@ function highlightLink() {
 }
 
 // Display alert box
-function showAlert(message, className) {
+function showAlert(message, className = 'alert-error') {
   const alertBox = document.getElementById('alert');
   const alertEl = document.createElement('div');
   alertEl.classList.add('alert', className);
