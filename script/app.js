@@ -261,12 +261,19 @@ async function showNowPlaying() {
 async function searchContent() {
   const queryString = window.location.search;
   const urlParam = new URLSearchParams(queryString);
-  console.log(urlParam.get('type'));
+  global.search.type = urlParam.get('type');
+  global.search.searchTerm = urlParam.get('search-term');
+  console.log(global);
 
-  const checkedRadio = document.querySelector('.search-radio-box input[type=radio]:checked');
-  
-  const { results } = await fetchData(`search/${checkedRadio.value}`);
-  console.log(results);
+  if (global.search.searchTerm && global.search.searchTerm !== '') {
+    const results = await searchAPIData();
+  } else {
+    showAlert('Please enter a search term');
+  }
+
+  // const checkedRadio = document.querySelector('.search-radio-box input[type=radio]:checked');
+  // const { results } = await fetchData(`search/${checkedRadio.value}`);
+  // console.log(results);
 }
 
 // Initialize swiper object
@@ -315,6 +322,17 @@ function highlightLink() {
       navLink.classList.add('active');
     }
   });
+}
+
+// Display alert box
+function showAlert(message, className) {
+  const alertBox = document.getElementById('alert');
+  const alertEl = document.createElement('div');
+  alertEl.classList.add('alert', className);
+  alertEl.appendChild(document.createTextNode(message));
+  alertBox.appendChild(alertEl);
+
+  setTimeout(() => alertEl.remove(), 3000);
 }
 
 // Display spinner
