@@ -6,10 +6,10 @@ const global = {
     page: 1,
     totalPage: 1,
   },
-  api:{
-    apiKey:'57dc4d5627c7069bc2cd661cd5a170ea',
-    apiURL: 'https://api.themoviedb.org/3'
-  }
+  api: {
+    apiKey: '57dc4d5627c7069bc2cd661cd5a170ea',
+    apiURL: 'https://api.themoviedb.org/3',
+  },
 };
 
 // Show popular movies
@@ -267,7 +267,6 @@ async function searchContent() {
   const urlParam = new URLSearchParams(queryString);
   global.search.type = urlParam.get('type');
   global.search.searchTerm = urlParam.get('search-term');
-  console.log(global);
 
   if (global.search.searchTerm && global.search.searchTerm !== '') {
     const results = await searchAPIData();
@@ -307,6 +306,20 @@ function initSwiper() {
   });
 }
 
+// Make request to search
+async function searchAPIData() {
+  const API_KEY = global.api.apiKey;
+  const API_URL = global.api.apiURL;
+  // while data fecthing spinner display
+  showSpinner();
+  const response = await fetch(
+    `${API_URL}/search/${global.search.type}?api_key=${API_KEY}&language=en-US=${global.search.searchTerm}`
+  );
+  const data = await response.json();
+  hideSpinner();
+  return data;
+}
+
 // Fetch data from TMDB api
 async function fetchData(endpoint) {
   const API_KEY = global.api.apiKey;
@@ -317,7 +330,7 @@ async function fetchData(endpoint) {
   const data = await response.json();
   hideSpinner();
   return data;
-} 
+}
 
 // Highlight active navbar link
 function highlightLink() {
@@ -371,7 +384,6 @@ function initializeApp() {
       searchContent();
       showNowPlaying();
     default:
-      console.log('none');
       break;
   }
   highlightLink();
