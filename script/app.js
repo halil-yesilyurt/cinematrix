@@ -344,34 +344,52 @@ function displayPagination() {
   if (global.search.page === 1) prevBtn.style.cssText = 'pointer-events:none;opacity:.6;';
   if (global.search.page === global.search.totalPage) nextBtn.style.cssText = 'pointer-events:none;opacity:.6;';
 
-  // Next page
-  nextBtn.addEventListener('click', async () => {
-    global.search.page++;
+  // // Next page
+  // nextBtn.addEventListener('click', async () => {
+  //   global.search.page++;
+  //   showSpinner();
+  //   const { results, total_pages } = await searchAPIData();
+  //   hideSpinner();
+  //   displaySearchResults(results);
+
+  //   // Scroll to the top of the page
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: 'smooth',
+  //   });
+  // });
+
+  // // Prev page
+  // prevBtn.addEventListener('click', async () => {
+  //   global.search.page--;
+  //   showSpinner();
+  //   const { results, total_pages } = await searchAPIData();
+  //   hideSpinner();
+  //   displaySearchResults(results);
+  //   // Scroll to the top of the page
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: 'smooth',
+  //   });
+  // });
+
+  const navigatePage = async (direction) => {
+    global.search.page += direction;
     showSpinner();
     const { results, total_pages } = await searchAPIData();
     hideSpinner();
     displaySearchResults(results);
 
-    // Scroll to the top of the page
+    // Scroll smoothly to the top of the page
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-  });
+  };
 
-  // Prev page
-  prevBtn.addEventListener('click', async () => {
-    global.search.page--;
-    showSpinner();
-    const { results, total_pages } = await searchAPIData();
-    hideSpinner();
-    displaySearchResults(results);
-    // Scroll to the top of the page
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  });
+  // Event listeners for next and previous buttons
+  nextBtn.addEventListener('click', () => navigatePage(1));
+  prevBtn.addEventListener('click', () => navigatePage(-1));
 }
 
 // Initialize swiper object
