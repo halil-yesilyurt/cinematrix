@@ -5,6 +5,7 @@ const global = {
     searchTerm: '',
     page: 1,
     totalPage: 1,
+    totalResult: 0,
   },
   api: {
     apiKey: '57dc4d5627c7069bc2cd661cd5a170ea',
@@ -268,14 +269,19 @@ async function searchContent() {
   global.search.searchTerm = urlParam.get('search-term');
 
   if (global.search.searchTerm && global.search.searchTerm !== '') {
-    const { results, total_pages, page } = await searchAPIData();
-    console.log(results);
+    const { results, total_pages, page, total_results } = await searchAPIData();
+    console.log(results, total_pages, page, total_results);
     const searchInput = document.querySelector('.search-term');
+    global.search.page = page;
+    global.search.totalPage = total_pages;
+    global.search.totalResult = total_results;
     if (results.length === 0) {
       showAlert('No results found');
       return;
     }
+
     displaySearchResults(results);
+    const searchHeading = document.getElementById('search-results-heading');
 
     searchInput.value = '';
   } else {
