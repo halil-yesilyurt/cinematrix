@@ -39,18 +39,16 @@
       </div>
     </header>
 
-   
-
     <!-- search form -->
     <section class="search">
       <div class="inner-container">
         <div id="alert"></div>
-        <form action="search.html" class="search-form">
+        <form action="/pages/search.html" class="search-form">
           <div class="search-radio-box">
             <input type="radio" name="type" id="movie" value="movie" checked />
             <label for="movie">Movies</label>
-            <input type="radio" name="type" id="tv-series" value="show" />
-            <label for="show">TV Series</label>
+            <input type="radio" name="type" id="tv-series" value="tv" />
+            <label for="tv">TV Series</label>
           </div>
           <div class="search-input">
             <input type="text" name="search-term" class="search-term" placeholder="What are you looking for?" />
@@ -65,19 +63,12 @@
     <!-- search results -->
     <section id="search-results-wrapper" class="inner-container">
       <heading id="search-results-heading"></heading>
-      <div id="search-results" class="grid">
-      </div>
-      <div id="pagination">
-        <div class="pagination">
-          <button class="btn btn-primary" id="prev">Prev</button>
-          <button class="btn btn-primary" id="next">Next</button>
-          <div class="page-counter">Page 1 of 5</div>
-        </div>
-      </div>
+      <div id="search-results"></div>
+      <div id="pagination"></div>
     </section>
 
-     <!-- now playing -->
-     <section class="now-playing">
+    <!-- now playing -->
+    <section class="now-playing">
       <h2>Now Playing</h2>
       <div class="swiper">
         <div class="swiper-wrapper"></div>
