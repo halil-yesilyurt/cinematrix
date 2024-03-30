@@ -294,8 +294,13 @@ async function searchContent() {
 
 // Display search results
 function displaySearchResults(results) {
+  // Remove previous results
+  const searchResult = document.getElementById('search-results');
+  searchResult.innerHTML = '';
+  document.getElementById('search-results-heading').innerHTML = '';
+  document.getElementById('pagination').innerHTML = '';
+
   results.forEach((result) => {
-    const searchResult = document.getElementById('search-results');
     const imgSrc = result.poster_path
       ? `https://image.tmdb.org/t/p/w300${result.poster_path}`
       : '../images/no-image.jpg';
@@ -334,8 +339,20 @@ function displayPagination() {
   paginationWrap.appendChild(div);
 
   // Disable pagination buttons by checking the page number
-  if (global.search.page === 1) document.getElementById('prev').style.cssText = 'pointer-events:none;opacity:.6;';
-  if (global.search.page === global.search.totalPage) document.getElementById('next').style.cssText = 'pointer-events:none;opacity:.6;';
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  if (global.search.page === 1) prevBtn.style.cssText = 'pointer-events:none;opacity:.6;';
+  if (global.search.page === global.search.totalPage) nextBtn.style.cssText = 'pointer-events:none;opacity:.6;';
+
+  // Next page
+  nextBtn.addEventListener('click', async () => {
+    global.search.page++;
+    showSpinner();
+    const { results, total_results } = await searchAPIData();
+    hideSpinner();
+    displaySearchResults(results);
+
+  });
 }
 
 // Initialize swiper object
@@ -371,7 +388,7 @@ async function searchAPIData() {
   // while data fecthing spinner display
   showSpinner();
   const response = await fetch(
-    `${API_URL}/search/${global.search.type}?api_key=${API_KEY}&language=en-US&query=${global.search.searchTerm}`
+    `${API_URL}/search/${global.search.type}?api_key=${API_KEY}&language=en-US&query=${global.search.searchTerm}&page=${global.search.page}`
   );
   const data = await response.json();
   hideSpinner();
