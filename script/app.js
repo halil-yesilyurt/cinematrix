@@ -351,7 +351,12 @@ function displayPagination() {
     const { results, total_results } = await searchAPIData();
     hideSpinner();
     displaySearchResults(results);
-
+    
+    // Scroll to the top of the page
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   });
 }
 
