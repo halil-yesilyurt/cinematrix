@@ -290,10 +290,6 @@ async function searchContent() {
   } else {
     showAlert('Please enter a search term');
   }
-
-  // const checkedRadio = document.querySelector('.search-radio-box input[type=radio]:checked');
-  // const { results } = await fetchData(`search/${checkedRadio.value}`);
-  // console.log(results);
 }
 
 // Display search results
@@ -322,6 +318,21 @@ function displaySearchResults(results) {
     `;
     searchResult.appendChild(div);
   });
+
+  displayPagination();
+}
+
+// Show pagination
+function displayPagination() {
+  const paginationWrap = document.getElementById('pagination');
+  const div = document.createElement('div');
+  div.classList.add('pagination');
+  div.innerHTML = ` <button class="btn btn-primary" id="prev">Prev</button>
+  <div class="page-counter">Page ${global.search.page} of ${global.search.totalPage}</div>
+  <button class="btn btn-primary" id="next">Next</button>
+  `;
+  paginationWrap.appendChild(div);
+
 }
 
 // Initialize swiper object
