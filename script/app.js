@@ -323,7 +323,7 @@ function displaySearchResults(results) {
     `;
     searchResult.appendChild(div);
   });
-
+  document.title=`'${global.search.searchTerm}' search results in ${global.search.type === 'movie' ? 'movies' : 'tv series'} | Cinematrix`
   displayPagination();
 }
 
