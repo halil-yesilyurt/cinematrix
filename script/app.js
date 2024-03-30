@@ -282,6 +282,9 @@ async function searchContent() {
 
     displaySearchResults(results);
     const searchHeading = document.getElementById('search-results-heading');
+    searchHeading.innerHTML = `
+<h2>${results.length} of ${global.search.totalResult} results for '${global.search.searchTerm}' </h2>
+`;
 
     searchInput.value = '';
   } else {
