@@ -323,7 +323,11 @@ function displaySearchResults(results) {
     `;
     searchResult.appendChild(div);
   });
-  document.title=`'${global.search.searchTerm}' search results in ${global.search.type === 'movie' ? 'movies' : 'tv series'} | Cinematrix`
+  // Update document title by query
+  document.title = `'${global.search.searchTerm}' search results in ${
+    global.search.type === 'movie' ? 'movies' : 'tv series'
+  } | Cinematrix`;
+
   displayPagination();
 }
 
@@ -418,6 +422,30 @@ function initSwiper() {
   });
 }
 
+async function showTrendMovies() {
+  const API_KEY = global.api.apiKey;
+  const API_URL = global.api.apiURL;
+
+  const response = await fetch(`${API_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US`);
+  const data = await response.json();
+
+  console.log(data);
+  const { results } = data;
+  const trendMovie = document.querySelector('.trending-movies');
+  results.forEach((movie) => {
+    const moviePoster = movie.poster_path
+      ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+      : '../images/no-image.jpg';
+    const div = document.createElement('div');
+    div.classList.add('trend-poster');
+    div.innerHTML = `<img src='${moviePoster}' alt='${movie.title}'>`;
+    trendMovie.appendChild(div);
+  });
+
+}
+
+
+
 // Make request to search
 async function searchAPIData() {
   const API_KEY = global.api.apiKey;
@@ -482,6 +510,7 @@ function initializeApp() {
       showPopularMovies();
       showNowPlaying();
       searchContent();
+      showTrendMovies();
       break;
     case '/pages/tv-shows.html':
       showPopularTvShows();
@@ -495,6 +524,7 @@ function initializeApp() {
     case '/pages/search.html':
       searchContent();
       showNowPlaying();
+      showTrendMovies();
     default:
       break;
   }
