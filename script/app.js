@@ -441,10 +441,39 @@ async function showTrendMovies() {
     div.innerHTML = `<img src='${moviePoster}' alt='${movie.title}'>`;
     trendMovie.appendChild(div);
   });
-
+  showTrendTvSeries();
+  results.forEach((movie) => {
+    const moviePoster = movie.poster_path
+      ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+      : '../images/no-image.jpg';
+    const div = document.createElement('div');
+    div.classList.add('trend-poster');
+    div.innerHTML = `<img src='${moviePoster}' alt='${movie.title}'>`;
+    trendMovie.appendChild(div);
+  });
+  showTrendTvSeries();
 }
 
+async function showTrendTvSeries() {
+  const API_KEY = global.api.apiKey;
+  const API_URL = global.api.apiURL;
 
+  const response = await fetch(`${API_URL}/trending/tv/day?api_key=${API_KEY}&language=en-US`);
+  const data = await response.json();
+
+  console.log(data);
+  const { results } = data;
+  const trendMovie = document.querySelector('.trending-movies');
+  results.forEach((movie) => {
+    const moviePoster = movie.poster_path
+      ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+      : '../images/no-image.jpg';
+    const div = document.createElement('div');
+    div.classList.add('trend-poster');
+    div.innerHTML = `<img src='${moviePoster}' alt='${movie.title}'>`;
+    trendMovie.appendChild(div);
+  });
+}
 
 // Make request to search
 async function searchAPIData() {
