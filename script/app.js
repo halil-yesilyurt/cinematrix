@@ -333,6 +333,9 @@ function displayPagination() {
   `;
   paginationWrap.appendChild(div);
 
+  // Disable pagination buttons by checking the page number
+  if (global.search.page === 1) document.getElementById('prev').style.cssText = 'pointer-events:none;opacity:.6;';
+  if (global.search.page === global.search.totalPage) document.getElementById('next').style.cssText = 'pointer-events:none;opacity:.6;';
 }
 
 // Initialize swiper object
