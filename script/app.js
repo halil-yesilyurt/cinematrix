@@ -50,7 +50,7 @@ async function showPopularTvShows() {
       ? `https://image.tmdb.org/t/p/original${show.poster_path}`
       : '../images/no-image.jpg';
     tvShow.innerHTML = `
-    <a href="/pages/show-details.html?id=${show.id}">
+    <a href="/pages/tv-details.html?id=${show.id}">
             <img src=${showPoster} class="card-img-top" alt="${show.name}" />
           </a>
           <div class="card-body">
@@ -290,23 +290,28 @@ async function searchContent() {
 // Display search results
 function displaySearchResults(results) {
   results.forEach((result) => {
-    const searchResult = document.getElementById('search-results-wrapper');
+    const searchResult = document.getElementById('search-results');
+    const imgSrc = result.poster_path
+      ? `https://image.tmdb.org/t/p/w300${result.poster_path}`
+      : '../images/no-image.jpg';
     const div = document.createElement('div');
-    div.setAttribute('id', 'search-results');
+    div.setAttribute('class', 'card');
     div.innerHTML = `
-    <div class="card">
         <a href="/pages/${global.search.type}-details.html?id=${result.id}"">
-          <img src="../images/no-image.jpg" class="card-img-top" alt="" />
+          <img src="${imgSrc}" class="card-img-top" alt="${
+      global.search.type === 'movie' ? result.title : result.name
+    }" />
         </a>
         <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
+          <h5 class="card-title">${global.search.type === 'movie' ? result.title : result.name}</h5>
           <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
+            <small class="text-muted">Release: ${
+              global.search.type === 'movie' ? result.release_date : result.first_air_date
+            }</small>
           </p>
         </div>
-      </div>
     `;
-    searchResult.appendChild(div)
+    searchResult.appendChild(div);
   });
 }
 
@@ -404,7 +409,7 @@ function initializeApp() {
     case '/pages/tv-shows.html':
       showPopularTvShows();
       break;
-    case '/pages/show-details.html':
+    case '/pages/tv-details.html':
       showTvShowDetails();
       break;
     case '/pages/movie-details.html':
