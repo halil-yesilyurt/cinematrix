@@ -348,10 +348,24 @@ function displayPagination() {
   nextBtn.addEventListener('click', async () => {
     global.search.page++;
     showSpinner();
-    const { results, total_results } = await searchAPIData();
+    const { results, total_pages } = await searchAPIData();
     hideSpinner();
     displaySearchResults(results);
-    
+
+    // Scroll to the top of the page
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  });
+
+  // Prev page
+  prevBtn.addEventListener('click', async () => {
+    global.search.page--;
+    showSpinner();
+    const { results, total_pages } = await searchAPIData();
+    hideSpinner();
+    displaySearchResults(results);
     // Scroll to the top of the page
     window.scrollTo({
       top: 0,
