@@ -104,6 +104,7 @@ function showBackgroundImg(type, path) {
     left: 0;
     z-index: -1;
     opacity: 0.1;
+    max-width: 100%;
   }
 `;
   document.head.appendChild(style);
@@ -134,7 +135,7 @@ async function showMovieDetails() {
     </p>
     <p class="text-muted">Release Date: ${movie.release_date}</p>
     <p>${movie.overview}</p>
-    <h5>Genres</h5>
+    <h3>Genres</h3>
     <ul class="list-group">
     ${movie.genres.map((movie) => `<li>${movie.name}</li>`).join('')}
     </ul>
@@ -202,12 +203,12 @@ async function showTvShowDetails() {
       ${tvShow.vote_average.toFixed(1)} / 10 
     </p>
     <p>${tvShow.overview}</p>
-    <h5>Genres</h5>
+    <h3>Genres</h3>
     <ul class="list-group">
     ${tvShow.genres.map((show) => `<li>${show.name}</li>`).join('')}
     </ul>
     <div class="btn-group">
-    <a href="${tvShow.homepage}" target="_blank" class="btn btn-homepage">Movie Page</a>
+    <a href="${tvShow.homepage}" target="_blank" class="btn btn-homepage">TV Show Page</a>
     </div>
   </div>
 </div>
