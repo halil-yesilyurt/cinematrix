@@ -39,11 +39,29 @@ async function showPopularMovies() {
   });
 }
 
-// Show latest movies
-async function showLatestMovies() {
-  const latestMovies = document.getElementById('movie-latest');
-  const { results } = await fetchData('movie/latest');
+// Show upcoming movies
+async function showUpcomingMovies() {
+  const upcomingMovies = document.getElementById('movie-upcoming');
+  const { results } = await fetchData('movie/upcoming');
   console.log(results);
+  results.forEach((movie) => {
+    const div = document.createElement('div');
+    div.classList.add('card');
+    // Check if movie poster exist
+    const moviePoster = movie.poster_path
+      ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+      : '../images/no-image.jpg';
+    div.innerHTML = `<a href="/pages/movie-details.html?id=${movie.id}">
+<img src=${moviePoster} class="card-img-top" alt="${movie.title}" />
+</a>
+<div class="card-body">
+<h5 class="card-title">${movie.title}</h5>
+<p class="card-text">
+  <small class="text-muted">Release Date: ${movie.release_date}</small>
+</p>
+</div>`;
+    upcomingMovies.appendChild(div);
+  });
 }
 
 // Show popular tv shows
@@ -560,7 +578,7 @@ function initializeApp() {
       showNowPlaying();
       break;
     case '/pages/movies.html':
-      showLatestMovies();
+      showUpcomingMovies();
       break;
     case '/pages/tv-shows.html':
       showPopularTvShows();
