@@ -17,7 +17,7 @@ html {
 }
 body {
   font-family: var(--font-primary);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: #fff;
   background: #23272f;
   min-height: 100vh;
@@ -58,14 +58,14 @@ ul {
 }
 .btn-imdb,
 .btn-homepage {
-  padding: 1rem 2rem;
+  padding: 0.6rem 1.6rem;
   color: rgb(0, 0, 0);
   font-weight: 700;
   text-transform: capitalize;
   border-radius: 0.3rem;
   box-shadow: 0px 0px 14px -7px #e2b616;
   background-image: linear-gradient(45deg, #e2b616 0%, #c9c2a8 51%, #e2b616 100%);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 .btn-homepage {
   box-shadow: 0px 0px 14px -7px #f09819;
@@ -112,7 +112,10 @@ ul {
   max-width: 1200px;
   width: 100%;
   margin-inline: auto;
-  padding: 0 16px;
+  padding: 0 1.6rem;
+}
+section.inner-container {
+  padding: 2rem 1.6rem;
 }
 /* header start */
 .header {
@@ -132,7 +135,7 @@ ul {
   align-items: center;
 }
 .header-logo img {
-  max-width: clamp(180px, 25vw, 200px);
+  max-width: clamp(150px, 20vw, 200px);
 }
 .navbar ul {
   gap: 1rem;
@@ -146,20 +149,65 @@ ul {
 .nav-link:focus {
   color: var(--color-secondary);
 }
+input[type='checkbox'] {
+  display: none;
+}
 /* header end */
 /* now playing start */
 .now-playing {
-  padding: 100px;
+  padding: clamp(5rem, 1vw, 10rem);
+  position: relative;
   min-height: 300px;
-  background: url(../images/placeholder.jpg) no-repeat center center/cover;
+  overflow: hidden;
 }
 .now-playing h2 {
   font-family: var(--font-secondary);
   font-size: 3rem;
-  color: var(--color-primary);
+  color: #fff;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.trending-movies {
+  position: absolute;
+  opacity: 0.1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  left: 0;
+  top: -30px;
+  right: 0;
+  z-index: -1;
+}
+.trend-poster img {
+  width: 100%;
+  height: 100%;
+}
+.swiper {
+  width: 100%;
+  height: 50%;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 1.8rem;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper-rating {
+  padding: 10px;
 }
 /* now playing end */
 /* search start */
+.search {
+  position: relative;
+}
 .search-radio-box label {
   font-size: 1.6rem;
   color: #fff;
@@ -167,6 +215,7 @@ ul {
 }
 .search .inner-container {
   max-width: 600px;
+  margin: 3rem auto;
 }
 .search-input {
   width: 100%;
@@ -206,17 +255,34 @@ ul {
   opacity: 0.8;
   color: rgba(0, 0, 0, 0.7);
 }
+#alert {
+  position: absolute;
+  right: 0;
+  top: 8px;
+}
+.alert {
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.alert-success {
+  background: green;
+}
+.alert-error {
+  background: #c60000;
+}
 /* search end */
 /* popular movies start */
 #popular-movies,
-#popular-shows {
+#popular-shows,
+#movie-upcoming {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 2rem;
+  justify-items: center;
 }
 .inner-container h2 {
   text-align: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 .card {
   background: #4c566a;
@@ -235,7 +301,7 @@ ul {
   background: #5e81ac;
 }
 /* popular movies end */
-/* !footer start */
+/* footer start */
 .footer {
   background: #3b4252;
   padding: 20px 0;
@@ -252,7 +318,7 @@ ul {
 .footer .social-links {
   display: flex;
   font-size: 1.8rem;
-  gap: 10px;
+  gap: 2rem;
 }
 .footer .social-links a {
   color: #d8dee9;
@@ -266,6 +332,12 @@ ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
 }
 /* search page end */
 .active {
@@ -283,7 +355,11 @@ ul {
   align-items: center;
   gap: 2rem;
 }
+.details-top h3 {
+  text-align: left;
+}
 .details-bottom {
+  margin-top: 1rem;
   display: flex;
   gap: 2rem;
   justify-content: space-between;
@@ -294,7 +370,7 @@ ul {
   flex-direction: column;
 }
 .card-img-top {
-  max-width: 300px;
+  max-width: 250px;
   object-fit: cover;
 }
 .fa-star {
@@ -310,7 +386,7 @@ ul {
 .movie-overview {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 .movie-overview .btn {
   align-self: center;
@@ -321,7 +397,7 @@ ul {
   gap: 1rem;
 }
 .details-bottom li {
-  padding: 1rem 0;
+  padding: 0.7rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .details-bottom li:last-child {
@@ -355,11 +431,14 @@ ul {
   width: 100%;
 }
 .company-link:hover,
-.company-link:focus{
+.company-link:focus {
   text-decoration: underline;
 }
-.details-bottom div{
+.details-bottom div {
   max-width: 300px;
+}
+.production-info .list-group {
+  margin-top: 1.5rem;
 }
 /* movie details page end */
 /* tv show details start */
@@ -369,3 +448,134 @@ ul {
   flex-direction: column;
 }
 /* tv show details end */
+/* QUERIES */
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 45%;
+  }
+  .navbar {
+    display: flex;
+    align-items: center;
+  }
+  .navbar ul {
+    display: block;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+  }
+  .navbar::before {
+    background: rgba(0, 0, 0, 0.5);
+    content: '';
+    height: 100vh;
+    left: 0;
+    top: 0;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+    transition: all 0.3s;
+  }
+  .navbar ul li {
+    border-bottom: 1px solid #ddd;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s;
+  }
+  .navbar ul li a {
+    display: block;
+    padding: 2rem 2.4rem;
+    text-align: left;
+    width: 100%;
+    transition: all 0.3s;
+    font-weight: 700;
+  }
+  input[type='checkbox'] {
+    display: block;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    right: 0;
+  }
+  input[type='checkbox']:checked + label {
+    border: 4px solid silver;
+    border-radius: 50%;
+    height: 28px;
+    right: 18px;
+    width: 28px;
+    transform: rotate(-135deg);
+  }
+  input[type='checkbox']:checked + label::before {
+    background: silver;
+    top: 8px;
+    right: 4px;
+    width: 12px;
+  }
+  input[type='checkbox']:checked + label::after {
+    background: silver;
+    opacity: 1;
+    top: 8px;
+    right: 4px;
+    visibility: visible;
+    width: 12px;
+  }
+  input[type='checkbox']:checked + label:hover {
+    border-color: #c90856;
+  }
+  input[type='checkbox']:checked ~ ul::before {
+    opacity: 1;
+    visibility: visible;
+  }
+  input[type='checkbox']:checked ~ ul {
+    background: #0e0e0e;
+  }
+  input[type='checkbox']:checked ~ ul li {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .navbar label {
+    background: none transparent;
+    border: 4px solid #c90856;
+    border-left: 0 solid transparent;
+    border-right: 0 solid transparent;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    transition: all 0.2s;
+  }
+  .navbar label:hover {
+    border-color: silver;
+  }
+  .navbar label:hover::before,
+  .navbar label:hover::after {
+    background: silver;
+  }
+  .navbar label::before {
+    background: #c90856;
+    content: '';
+    height: 4px;
+    right: 0;
+    position: absolute;
+    top: 6px;
+    width: 24px;
+    transition: all 0.2s;
+  }
+  .navbar label::after {
+    background: #c90856;
+    content: '';
+    height: 4px;
+    right: 0;
+    position: absolute;
+    top: 6px;
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+    transform: rotate(90deg);
+    transition: all 0.2s;
+  }
+}
