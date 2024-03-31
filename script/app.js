@@ -39,6 +39,13 @@ async function showPopularMovies() {
   });
 }
 
+// Show latest movies
+async function showLatestMovies() {
+  const latestMovies = document.getElementById('movie-latest');
+  const { results } = await fetchData('movie/latest');
+  console.log(results);
+}
+
 // Show popular tv shows
 async function showPopularTvShows() {
   const popularShows = document.getElementById('popular-shows');
@@ -89,9 +96,9 @@ async function showMovieDetails() {
   const movieID = Number(window.location.search.split('=')[1]);
   const movieDetails = document.getElementById('movie-details-wrapper');
   const movie = await fetchData(`movie/${movieID}`);
-  console.log(movie);
 
   showBackgroundImg('movie', movie.backdrop_path);
+
   const moviePoster = movie.poster_path
     ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
     : '../images/no-image.jpg';
@@ -158,8 +165,9 @@ async function showTvShowDetails() {
   const seriesID = Number(window.location.search.split('=')[1]);
   const tvShowDetails = document.getElementById('show-details-wrapper');
   const tvShow = await fetchData(`tv/${seriesID}`);
-  console.log(tvShow);
+
   showBackgroundImg('show', tvShow.backdrop_path);
+
   const tvPoster = tvShow.poster_path
     ? `https://image.tmdb.org/t/p/w300${tvShow.poster_path}`
     : '../images/no-image.jpg';
@@ -242,6 +250,7 @@ async function getProductionCompaniesDetails(companies) {
 
 // Display slider movies
 async function showNowPlaying() {
+  showTrendMovies();
   const { results } = await fetchData('movie/now_playing');
   const swiper = document.querySelector('.swiper-wrapper');
   results.forEach((movie) => {
@@ -265,13 +274,14 @@ async function showNowPlaying() {
 async function searchContent() {
   const queryString = window.location.search;
   const urlParam = new URLSearchParams(queryString);
+
   global.search.type = urlParam.get('type');
   global.search.searchTerm = urlParam.get('search-term');
 
   if (global.search.searchTerm && global.search.searchTerm !== '') {
     const { results, total_pages, page, total_results } = await searchAPIData();
-    console.log(results, total_pages, page, total_results);
     const searchInput = document.querySelector('.search-term');
+
     global.search.page = page;
     global.search.totalPage = total_pages;
     global.search.totalResult = total_results;
@@ -281,6 +291,7 @@ async function searchContent() {
     }
 
     displaySearchResults(results);
+
     const searchHeading = document.getElementById('search-results-heading');
     searchHeading.innerHTML = `
 <h2>${results.length} of ${global.search.totalResult} results for '${global.search.searchTerm}' </h2>
@@ -297,7 +308,7 @@ function displaySearchResults(results) {
   // Remove previous results
   const searchResult = document.getElementById('search-results');
   searchResult.innerHTML = '';
-  document.getElementById('search-results-heading').innerHTML = '';
+  // document.getElementById('search-results-heading').innerHTML = '';
   document.getElementById('pagination').innerHTML = '';
 
   results.forEach((result) => {
@@ -323,6 +334,7 @@ function displaySearchResults(results) {
     `;
     searchResult.appendChild(div);
   });
+
   // Update document title by query
   document.title = `'${global.search.searchTerm}' search results in ${
     global.search.type === 'movie' ? 'movies' : 'tv series'
@@ -335,6 +347,7 @@ function displaySearchResults(results) {
 function displayPagination() {
   const paginationWrap = document.getElementById('pagination');
   const div = document.createElement('div');
+
   div.classList.add('pagination');
   div.innerHTML = ` <button class="btn btn-primary" id="prev">Prev</button>
   <div class="page-counter">Page ${global.search.page} of ${global.search.totalPage}</div>
@@ -377,6 +390,7 @@ function displayPagination() {
   //   });
   // });
 
+  // ! UPDATE HEADING RESULT COUNT
   const navigatePage = async (direction) => {
     global.search.page += direction;
     showSpinner();
@@ -422,16 +436,15 @@ function initSwiper() {
   });
 }
 
+// Trending movies as background for slider
 async function showTrendMovies() {
   const API_KEY = global.api.apiKey;
   const API_URL = global.api.apiURL;
-
   const response = await fetch(`${API_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US`);
   const data = await response.json();
-
-  console.log(data);
   const { results } = data;
   const trendMovie = document.querySelector('.trending-movies');
+
   results.forEach((movie) => {
     const moviePoster = movie.poster_path
       ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -441,7 +454,10 @@ async function showTrendMovies() {
     div.innerHTML = `<img src='${moviePoster}' alt='${movie.title}'>`;
     trendMovie.appendChild(div);
   });
+
   showTrendTvSeries();
+
+  // Call one more to increase the image count
   results.forEach((movie) => {
     const moviePoster = movie.poster_path
       ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -451,19 +467,19 @@ async function showTrendMovies() {
     div.innerHTML = `<img src='${moviePoster}' alt='${movie.title}'>`;
     trendMovie.appendChild(div);
   });
+
   showTrendTvSeries();
 }
 
+// Trending tv series as background for slider
 async function showTrendTvSeries() {
   const API_KEY = global.api.apiKey;
   const API_URL = global.api.apiURL;
-
   const response = await fetch(`${API_URL}/trending/tv/day?api_key=${API_KEY}&language=en-US`);
   const data = await response.json();
-
-  console.log(data);
   const { results } = data;
   const trendMovie = document.querySelector('.trending-movies');
+
   results.forEach((movie) => {
     const moviePoster = movie.poster_path
       ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -479,6 +495,7 @@ async function showTrendTvSeries() {
 async function searchAPIData() {
   const API_KEY = global.api.apiKey;
   const API_URL = global.api.apiURL;
+
   // while data fecthing spinner display
   showSpinner();
   const response = await fetch(
@@ -486,6 +503,7 @@ async function searchAPIData() {
   );
   const data = await response.json();
   hideSpinner();
+
   return data;
 }
 
@@ -493,11 +511,13 @@ async function searchAPIData() {
 async function fetchData(endpoint) {
   const API_KEY = global.api.apiKey;
   const API_URL = global.api.apiURL;
+
   // while data fecthing spinner display
   showSpinner();
   const response = await fetch(`${API_URL}/${endpoint}?api_key=${API_KEY}&language=en-US`);
   const data = await response.json();
   hideSpinner();
+
   return data;
 }
 
@@ -538,8 +558,9 @@ function initializeApp() {
     case '/pages/index.html':
       showPopularMovies();
       showNowPlaying();
-      searchContent();
-      showTrendMovies();
+      break;
+    case '/pages/movies.html':
+      showLatestMovies();
       break;
     case '/pages/tv-shows.html':
       showPopularTvShows();
@@ -553,7 +574,6 @@ function initializeApp() {
     case '/pages/search.html':
       searchContent();
       showNowPlaying();
-      showTrendMovies();
     default:
       break;
   }
