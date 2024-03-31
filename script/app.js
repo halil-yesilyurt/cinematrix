@@ -327,7 +327,7 @@ function displaySearchResults(results) {
   // Remove previous results
   const searchResult = document.getElementById('search-results');
   searchResult.innerHTML = '';
-  // document.getElementById('search-results-heading').innerHTML = '';
+  document.getElementById('search-results-heading').innerHTML = '';
   document.getElementById('pagination').innerHTML = '';
 
   results.forEach((result) => {
@@ -409,9 +409,9 @@ function displayPagination() {
   //   });
   // });
 
-  // ! UPDATE HEADING RESULT COUNT
   const navigatePage = async (direction) => {
     global.search.page += direction;
+
     showSpinner();
     const { results, total_pages } = await searchAPIData();
     hideSpinner();
