@@ -13,7 +13,7 @@ Cinematrix is a web application built with HTML, CSS, and JavaScript that allows
 - Search Functionality: Users can search for specific movies or TV series by typing in keywords.
 
 <p align="center">
-    <img src="./images/screenshot3.png" alt="search results page" width="500"/>
+    <img src="./images/screenshot3.png" alt="search results page" width="300"/>
 </p>
 
 - Pagination: Search results are paginated, allowing users to navigate between multiple pages of results.
