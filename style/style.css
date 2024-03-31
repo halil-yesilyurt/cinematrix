@@ -125,7 +125,7 @@ section.inner-container {
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 9;
+  z-index: 4;
   padding: 10px 0;
 }
 .header .inner-container {
@@ -304,7 +304,7 @@ input[type='checkbox'] {
 /* footer start */
 .footer {
   background: #3b4252;
-  padding: 20px 0;
+  padding: 2rem 0;
   margin-top: auto;
 }
 .footer .inner-container {
@@ -331,7 +331,7 @@ input[type='checkbox'] {
 #search-results {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 20px;
+  grid-gap: 2rem;
 }
 .pagination {
   display: flex;
@@ -370,7 +370,6 @@ input[type='checkbox'] {
   flex-direction: column;
 }
 .card-img-top {
-  max-width: 250px;
   object-fit: cover;
 }
 .fa-star {
@@ -451,7 +450,7 @@ input[type='checkbox'] {
 /* QUERIES */
 @media only screen and (max-width: 768px) {
   html {
-    font-size: 45%;
+    font-size: 50%;
   }
   .navbar {
     display: flex;
@@ -460,7 +459,7 @@ input[type='checkbox'] {
   .navbar ul {
     display: block;
     position: absolute;
-    top: 60px;
+    top: 58px;
     left: 0;
     width: 100%;
   }
@@ -529,6 +528,7 @@ input[type='checkbox'] {
   }
   input[type='checkbox']:checked ~ ul {
     background: #0e0e0e;
+    border-top: 1px solid #ddd;
   }
   input[type='checkbox']:checked ~ ul li {
     opacity: 1;
@@ -577,5 +577,27 @@ input[type='checkbox'] {
     width: 100%;
     transform: rotate(90deg);
     transition: all 0.2s;
+  }
+  #popular-movies,
+  #popular-shows,
+  #movie-upcoming {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .details-bottom {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 3rem;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .details-top {
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 300px) {
+  #popular-movies,
+  #popular-shows,
+  #movie-upcoming {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 }
