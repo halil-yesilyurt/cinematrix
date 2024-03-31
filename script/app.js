@@ -277,7 +277,7 @@ async function showNowPlaying() {
     div.classList.add('swiper-slide');
     const imgSrc = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '../images/no-image.jpg';
     div.innerHTML = `
-    <a href="movie-details.html?id=${movie.id}">
+    <a href="/pages/movie-details.html?id=${movie.id}">
       <img src="${imgSrc}" alt="${movie.title}" />
     </a>
     <h4 class="swiper-rating">
@@ -379,35 +379,6 @@ function displayPagination() {
   const nextBtn = document.getElementById('next');
   if (global.search.page === 1) prevBtn.style.cssText = 'pointer-events:none;opacity:.6;';
   if (global.search.page === global.search.totalPage) nextBtn.style.cssText = 'pointer-events:none;opacity:.6;';
-
-  // // Next page
-  // nextBtn.addEventListener('click', async () => {
-  //   global.search.page++;
-  //   showSpinner();
-  //   const { results, total_pages } = await searchAPIData();
-  //   hideSpinner();
-  //   displaySearchResults(results);
-
-  //   // Scroll to the top of the page
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: 'smooth',
-  //   });
-  // });
-
-  // // Prev page
-  // prevBtn.addEventListener('click', async () => {
-  //   global.search.page--;
-  //   showSpinner();
-  //   const { results, total_pages } = await searchAPIData();
-  //   hideSpinner();
-  //   displaySearchResults(results);
-  //   // Scroll to the top of the page
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: 'smooth',
-  //   });
-  // });
 
   const navigatePage = async (direction) => {
     global.search.page += direction;
@@ -574,7 +545,7 @@ function hideSpinner() {
 // Runs when app initialize
 function initializeApp() {
   switch (global.currentPage) {
-    case '/pages/index.html':
+    case '/index.html':
       showPopularMovies();
       showNowPlaying();
       break;
