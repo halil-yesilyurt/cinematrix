@@ -546,18 +546,22 @@ function hideSpinner() {
 // Runs when app initialize
 function initializeApp() {
   switch (global.currentPage) {
-    case '/':
+    case '/index.html':
       showPopularMovies();
       showNowPlaying();
+      console.log('test');
       break;
     case '/pages/movies.html':
       showUpcomingMovies();
+      console.log('test');
       break;
     case '/pages/tv-shows.html':
       showPopularTvShows();
+      console.log('test');
       break;
     case '/pages/tv-details.html':
       showTvShowDetails();
+      console.log('test');
       break;
     case '/pages/movie-details.html':
       showMovieDetails();
@@ -566,9 +570,11 @@ function initializeApp() {
       searchContent();
       showNowPlaying();
     default:
+      console.log('test');
       break;
   }
   highlightLink();
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
+console.log('test');
