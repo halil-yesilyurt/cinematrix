@@ -50,7 +50,7 @@ Obtain an API key from TMDb and replace 'YOUR_API_KEY' in `/script/app.js` with 
 global.api.apiKey = 'YOUR_API_KEY';
 ```
 
-Open `/pages/index.html` in your preferred web browser.
+Open `index.html` in your preferred web browser.
 
 Explore currently playing movies, popular movies, and TV series. Use the search functionality to find specific movies or TV series.
 
