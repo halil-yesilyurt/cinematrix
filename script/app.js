@@ -17,6 +17,7 @@ const global = {
 async function showPopularMovies() {
   const popularMovies = document.getElementById('popular-movies');
   const { results } = await fetchData('movie/popular');
+  console.log(results);
   results.forEach((movie) => {
     const card = document.createElement('div');
     card.classList.add('card');
