@@ -17,7 +17,6 @@ const global = {
 async function showPopularMovies() {
   const popularMovies = document.getElementById('popular-movies');
   const { results } = await fetchData('movie/popular');
-  console.log(results);
   results.forEach((movie) => {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -26,7 +25,7 @@ async function showPopularMovies() {
       ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
       : '../images/no-image.jpg';
     card.innerHTML = `
-    <a href="/pages/movie-details.html?id=${movie.id}">
+    <a href="/movie-details.html?id=${movie.id}">
             <img src=${moviePoster} class="card-img-top" alt="${movie.title}" />
           </a>
           <div class="card-body">
@@ -44,7 +43,6 @@ async function showPopularMovies() {
 async function showUpcomingMovies() {
   const upcomingMovies = document.getElementById('movie-upcoming');
   const { results } = await fetchData('movie/upcoming');
-  console.log(results);
   results.forEach((movie) => {
     const div = document.createElement('div');
     div.classList.add('card');
@@ -52,7 +50,7 @@ async function showUpcomingMovies() {
     const moviePoster = movie.poster_path
       ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
       : '../images/no-image.jpg';
-    div.innerHTML = `<a href="/pages/movie-details.html?id=${movie.id}">
+    div.innerHTML = `<a href="/movie-details.html?id=${movie.id}">
 <img src=${moviePoster} class="card-img-top" alt="${movie.title}" />
 </a>
 <div class="card-body">
@@ -77,7 +75,7 @@ async function showPopularTvShows() {
       ? `https://image.tmdb.org/t/p/original${show.poster_path}`
       : '../images/no-image.jpg';
     tvShow.innerHTML = `
-    <a href="/pages/tv-details.html?id=${show.id}">
+    <a href="/tv-details.html?id=${show.id}">
             <img src=${showPoster} class="card-img-top" alt="${show.name}" />
           </a>
           <div class="card-body">
@@ -278,7 +276,7 @@ async function showNowPlaying() {
     div.classList.add('swiper-slide');
     const imgSrc = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '../images/no-image.jpg';
     div.innerHTML = `
-    <a href="/pages/movie-details.html?id=${movie.id}">
+    <a href="/movie-details.html?id=${movie.id}">
       <img src="${imgSrc}" alt="${movie.title}" />
     </a>
     <h4 class="swiper-rating">
@@ -338,7 +336,7 @@ function displaySearchResults(results) {
     const div = document.createElement('div');
     div.setAttribute('class', 'card');
     div.innerHTML = `
-        <a href="/pages/${global.search.type}-details.html?id=${result.id}"">
+        <a href="/${global.search.type}-details.html?id=${result.id}"">
           <img src="${imgSrc}" class="card-img-top" alt="${
       global.search.type === 'movie' ? result.title : result.name
     }" />
@@ -549,32 +547,26 @@ function initializeApp() {
     case '/index.html':
       showPopularMovies();
       showNowPlaying();
-      console.log('test');
       break;
-    case '/pages/movies.html':
+    case '/movies.html':
       showUpcomingMovies();
-      console.log('test');
       break;
-    case '/pages/tv-shows.html':
+    case '/tv-shows.html':
       showPopularTvShows();
-      console.log('test');
       break;
-    case '/pages/tv-details.html':
+    case '/tv-details.html':
       showTvShowDetails();
-      console.log('test');
       break;
-    case '/pages/movie-details.html':
+    case '/movie-details.html':
       showMovieDetails();
       break;
-    case '/pages/search.html':
+    case '/search.html':
       searchContent();
       showNowPlaying();
     default:
-      console.log('test');
       break;
   }
   highlightLink();
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
-console.log('test');
