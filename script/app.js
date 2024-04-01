@@ -545,7 +545,7 @@ function hideSpinner() {
 // Runs when app initialize
 function initializeApp() {
   switch (global.currentPage) {
-    case '/index.html':
+    case '/':
       showPopularMovies();
       showNowPlaying();
       break;
