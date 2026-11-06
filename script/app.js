@@ -477,7 +477,7 @@ async function showTrendTvSeries() {
 // The API credential must never be included in browser-side JavaScript.
 async function tmdbRequest(endpoint, params = {}) {
   const query = new URLSearchParams({
-    path: endpoint.replace(/^\\//, ''),
+    path: endpoint.replace(/^\/+/, ''),
     ...params,
   });
   const response = await fetch(`${global.api.apiURL}?${query}`);
