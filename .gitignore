@@ -1,0 +1,9 @@
+# Local credentials (deploy TMDB_API_KEY via Vercel environment variables)
+.env
+.env.*
+!.env.example
+
+# Installed dependencies and local output
+node_modules/
+.vercel/
+.DS_Store
