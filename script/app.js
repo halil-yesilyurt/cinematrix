@@ -8,8 +8,7 @@ const global = {
     totalResult: 0,
   },
   api: {
-    apiKey: 'REDACTED_REVOKED_TMDB_KEY',
-    apiURL: 'https://api.themoviedb.org/3',
+    apiURL: '/api/tmdb',
   },
 };
 
@@ -427,10 +426,7 @@ function initSwiper() {
 
 // Trending movies as background for slider
 async function showTrendMovies() {
-  const API_KEY = global.api.apiKey;
-  const API_URL = global.api.apiURL;
-  const response = await fetch(`${API_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US`);
-  const data = await response.json();
+  const data = await fetchData('trending/movie/day');
   const { results } = data;
   const trendMovie = document.querySelector('.trending-movies');
 
@@ -462,10 +458,7 @@ async function showTrendMovies() {
 
 // Trending tv series as background for slider
 async function showTrendTvSeries() {
-  const API_KEY = global.api.apiKey;
-  const API_URL = global.api.apiURL;
-  const response = await fetch(`${API_URL}/trending/tv/day?api_key=${API_KEY}&language=en-US`);
-  const data = await response.json();
+  const data = await fetchData('trending/tv/day');
   const { results } = data;
   const trendMovie = document.querySelector('.trending-movies');
 
@@ -480,34 +473,41 @@ async function showTrendTvSeries() {
   });
 }
 
-// Make request to search
-async function searchAPIData() {
-  const API_KEY = global.api.apiKey;
-  const API_URL = global.api.apiURL;
-
-  // while data fecthing spinner display
-  showSpinner();
-  const response = await fetch(
-    `${API_URL}/search/${global.search.type}?api_key=${API_KEY}&language=en-US&query=${global.search.searchTerm}&page=${global.search.page}`
-  );
-  const data = await response.json();
-  hideSpinner();
-
-  return data;
+// All TMDb requests go through a same-origin server endpoint.
+// The API credential must never be included in browser-side JavaScript.
+async function tmdbRequest(endpoint, params = {}) {
+  const query = new URLSearchParams({
+    path: endpoint.replace(/^\\//, ''),
+    ...params,
+  });
+  const response = await fetch(`${global.api.apiURL}?${query}`);
+  if (!response.ok) {
+    throw new Error(`Movie data unavailable (HTTP ${response.status}).`);
+  }
+  return response.json();
 }
 
-// Fetch data from TMDB api
-async function fetchData(endpoint) {
-  const API_KEY = global.api.apiKey;
-  const API_URL = global.api.apiURL;
-
-  // while data fecthing spinner display
+// Make request to search
+async function searchAPIData() {
   showSpinner();
-  const response = await fetch(`${API_URL}/${endpoint}?api_key=${API_KEY}&language=en-US`);
-  const data = await response.json();
-  hideSpinner();
+  try {
+    return await tmdbRequest(`search/${global.search.type}`, {
+      query: global.search.searchTerm,
+      page: String(global.search.page),
+    });
+  } finally {
+    hideSpinner();
+  }
+}
 
-  return data;
+// Fetch data from TMDb through the server proxy.
+async function fetchData(endpoint) {
+  showSpinner();
+  try {
+    return await tmdbRequest(endpoint);
+  } finally {
+    hideSpinner();
+  }
 }
 
 // Highlight active navbar link
