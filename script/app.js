@@ -283,8 +283,8 @@ async function showNowPlaying() {
     </h4>`;
     swiper.appendChild(div);
 
-    initSwiper();
   });
+  if (results.length) initSwiper();
 }
 
 // Search for content
@@ -400,13 +400,17 @@ function displayPagination() {
 
 // Initialize swiper object
 function initSwiper() {
-  const swiper = new Swiper('.swiper', {
+  const container = document.querySelector('.swiper');
+  if (!container || container.swiper || typeof Swiper === 'undefined') return;
+  const slideCount = container.querySelectorAll('.swiper-slide').length;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  new Swiper(container, {
     slidesPerView: 1,
     spaceBetween: 30,
     speed: 400,
-    loop: true,
+    loop: slideCount > 4,
     freeMode: true,
-    autoplay: {
+    autoplay: reducedMotion ? false : {
       delay: 4000,
       disableOnInteraction: false,
     },

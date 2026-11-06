@@ -34,7 +34,7 @@ Cinematrix is a web application built with HTML, CSS, and JavaScript that allows
 
 [TMDb API](https://www.themoviedb.org/): Cinematrix fetches movie and TV series data from the TMDb API.
 
-[JS Swiper Library](https://swiperjs.com/): Swiper is used to create smooth carousel effects for displaying movie and TV series posters.
+[Swiper](https://swiperjs.com/): Cinematrix loads a pinned patched browser bundle (12.1.2) from jsDelivr. The old vendored Swiper 8 build and unused npm dependency were removed.
 
 ## Usage
 
@@ -56,6 +56,10 @@ The browser calls `/api/tmdb`. A serverless function forwards **approved** reque
 If a key was previously committed to public source, **remove or revoke it in your TMDb account**; deleting it from the latest code does not erase Git history or previously published bundles.
 
 Explore currently playing movies, popular movies, and TV series. Use the search functionality to find specific movies or TV series.
+
+### Local checks
+
+Run `npm ci && npm test && npm audit --audit-level=low`. Browser checks should cover the home carousel, search, mobile layouts, and reduced-motion preference. Swiper is loaded from a CDN, so internet access is required for the carousel.
 
 ## Contributing
 
