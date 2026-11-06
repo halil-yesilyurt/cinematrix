@@ -44,13 +44,16 @@ Clone the repository to your local machine.
 git clone https://github.com/halil-yesilyurt/cinematrix
 ```
 
-Obtain an API key from TMDb and replace 'YOUR_API_KEY' in `/script/app.js` with your actual API key.
+### API setup (Vercel)
 
-```javascript
-global.api.apiKey = 'YOUR_API_KEY';
-```
+The browser calls `/api/tmdb`. A serverless function forwards **approved** requests to TMDb using the `TMDB_API_KEY` environment variable. **Do not put API credentials into `script/app.js`, browser HTML, or the Git repository.**
 
-Open `index.html` in your preferred web browser.
+1. Obtain or rotate the TMDb API v3 key from your TMDb account's **Settings → API**.
+2. In the **Cinematrix Vercel project**, add `TMDB_API_KEY` to the appropriate environment(s), and redeploy so the serverless function receives it.
+3. Visit `/api/tmdb?path=movie/popular` on your deployed project to check that the proxy returns movie data. Without the variable, the endpoint returns HTTP 503.
+4. The API proxy does not run by double-clicking `index.html`. Run the site through a deployment/runtime that supports serverless functions (for local development, use a Vercel-compatible dev server).
+
+If a key was previously committed to public source, **remove or revoke it in your TMDb account**; deleting it from the latest code does not erase Git history or previously published bundles.
 
 Explore currently playing movies, popular movies, and TV series. Use the search functionality to find specific movies or TV series.
 
